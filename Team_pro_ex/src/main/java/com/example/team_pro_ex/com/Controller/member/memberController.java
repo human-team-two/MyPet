@@ -19,6 +19,7 @@ import java.util.Map;
 @RequestMapping(path = "/Member")
 public class memberController {
 
+
     private final memberService memberService;
 
     @Autowired
@@ -98,8 +99,14 @@ public class memberController {
             }
             return "/Member/mJoin/Join";
         }
-        memberService.insertMember(member);
-        return "redirect:/Member/Login";
+        Member findMember = memberService.getMemberWhereId(member.getId());
+        if(findMember != null){
+            System.out.println("중복 된 아이디 입니다.");
+            return "/Member/mJoin/Join";
+        }else{
+            memberService.insertMember(member);
+            return "redirect:/Member/Login";
+        }
     }
 
     @GetMapping("/mUpdate/Update") //마이 페이지 수정폼

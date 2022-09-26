@@ -42,10 +42,6 @@ public class memberServiceImpl implements memberService{
             return memberRepo.findById(member.getMember_Number_Seq()).get();
         else return null;
     }
-
-
-
-
     //회원정보 업데이트
     @Override
     public void updateMember(Member member) {
@@ -103,22 +99,25 @@ public class memberServiceImpl implements memberService{
     //회원가입 및 중복체크
     @Override
     public void insertMember(Member member) {
+        memberRepo.save(member);
         System.out.println("--------회원가입---------");
         Member findMember = memberRepo.findMemberById(member.getId());
         if(findMember != null){
             System.out.println("중복된 아이디 입니다.");
         }else{
-            memberRepo.save(member);
+
         }
     }
+
+
 
 
 
     // 아이디 찾기
     @Override
     public boolean booleanSearchUserById(Member member) {
-        for(Member member1 : memberRepo.findByIdContains(member.getId())) {
-            System.out.println("아이디 : " + member1.getId());
+        for(Member findMember : memberRepo.findByIdContains(member.getId())) {
+            System.out.println("아이디 : " + findMember.getId());
         }
         return false;
     }

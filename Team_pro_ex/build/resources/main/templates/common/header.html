@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/css/header.css">
 </th:block>
     <div th:fragment="header" id="header">
-        <a class="header-logo" th:href="@{/index}">마이 펫</a>
+        <a class="header-logo" th:href="@{/}">마이 펫</a>
         <form method="get" action="#">
             <input class="header-input-text" type="text" name="">
             <input class="header-input-img" type="submit" value="search">
@@ -13,9 +13,9 @@
         </form>
         <ul>
             <li>
-                <a href="/resources/templates/index">내주변</a>
-                <a href="/templates/index">예약내역</a>
-                <a href="/index">더보기</a>
+                <a href="/">내주변</a>
+                <a href="/">예약내역</a>
+                <a href="/">더보기</a>
                 <a href="/Member/Login">로그인</a>
             </li>
         </ul>

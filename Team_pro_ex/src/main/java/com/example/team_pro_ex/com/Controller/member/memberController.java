@@ -27,8 +27,9 @@ public class memberController {
     }
 
 
-    @GetMapping("index")
-    public void index(){
+    @GetMapping("/index")
+    public String index(){
+        return "index";
     }
 
     @GetMapping("/memberList/members")

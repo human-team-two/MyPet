@@ -74,7 +74,7 @@ public class Member extends member_BaseEntity {
     private Integer petW; //--펫 몸무게
 
     //권한에 대해 부여하기 위해서 변수를 만듬 : 관리자, 회원, 사업자를 나누기 위해서
-    private String role;
+    private String role = "Member";
 
     @Column(name = "member_join_M", length = 1, nullable = false)
     private String joinM = "Y"; //--가입상태

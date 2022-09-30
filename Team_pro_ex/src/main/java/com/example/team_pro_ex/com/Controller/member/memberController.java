@@ -100,17 +100,23 @@ public class memberController {
             return "/Member/mJoin/Join";
         }
         Member findMember = memberService.getMemberWhereId(member.getId());
+        System.out.println("중복 : " + member.getId());
         if(findMember != null){
-            System.out.println("중복 된 아이디 입니다.");
+            System.out.println("중복 된 아이디 입니다." + member.getId());
             return "/Member/mJoin/Join";
         }else{
+            System.out.println("회원가입 되었습니다! : " + member.getId());
             memberService.insertMember(member);
-            return "redirect:/Member/Login";
+            // 회원 가입에 성공하면 메인페이지로 다시 돌아오게 했다.
+            // 로그인페이지로 다시 돌아가면 인증된 아이디이기 때문에
+            // 아이디가 중복이 됐다고 출력문이 나오기 때문이다.
+            //redirect:/Member/Login
+            return "/index";
         }
     }
 
     @GetMapping("/mUpdate/Update") //마이 페이지 수정폼
-    public String myPage(Member member, Model model){
+    public String updateM(Member member, Model model){
         System.out.println("get mapping account !!");
         System.out.println("get방식으로 인한 Join페이지 = 우리가 처음 join페이지를 들어갈 떄는 null값이 뜰 수 밖에없다.");
         System.out.println("왜냐!!?!? 값이 없으니까!");
@@ -177,7 +183,9 @@ public class memberController {
 
     //로그인
     @GetMapping("/Login")
-    public void loginView(){
+    public String loginView(){
+
+        return "/Member/Login";
     }
     //로그인
     @PostMapping("/Login")

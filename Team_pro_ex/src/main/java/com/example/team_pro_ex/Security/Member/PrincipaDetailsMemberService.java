@@ -1,0 +1,28 @@
+package com.example.team_pro_ex.Security.Member;
+
+import com.example.team_pro_ex.com.Entity.member.Member;
+import com.example.team_pro_ex.com.persistence.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+
+@Service
+@RequiredArgsConstructor
+public class PrincipaDetailsMemberService implements UserDetailsService {
+
+    // 멤버 레파지토리 선언만 하면 안되는데 @RequiredArgsConstructor 어노테이션을 선언하면 된다!
+    private final MemberRepository memberRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+
+        Member member = memberRepository.findMemberById(id);
+        if(member != null){
+            return new PrincipaDetailsMember(member);
+        }
+        return null;
+    }
+}

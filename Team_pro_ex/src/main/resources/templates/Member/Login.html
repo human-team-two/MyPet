@@ -7,6 +7,13 @@
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
+
+
+
+
+
+
+
 </head>
 <body>
 <header th:replace="common/header :: header"></header>
@@ -24,6 +31,7 @@
                     </div>
                     <button class="login-btn" type="submit">로그인</button>
                 </div>
+                <P th:if="${loginErroMsg}" th:text="${loginErroMsg}"></P>
                 <div>
                     <ul class="login-ul">
                         <li><a href="/Member/selectMember/select">사용자 아이디 찾기</a></li>

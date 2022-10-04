@@ -18,7 +18,7 @@ public class PrincipaDetailsMemberService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-
+        //member에서 member.id를 찾는다. null이 아닐경우 PrincipaDetailsMember(member)를 리턴해준다.
         Member member = memberRepository.findMemberById(id);
         if(member != null){
             return new PrincipaDetailsMember(member);

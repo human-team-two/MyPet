@@ -44,7 +44,7 @@ public class businessMember extends member_BaseEntity {
         private String joinM = "Y"; //--가입상태
 
         @Column(name = "business_member_Role")
-        private String Role = "ROLE_ADMIN";
+        private String Role;
 
 //        @Pattern(regexp = "(?=.*[0-9]).{10}", message = "핸드폰 번호는 예)041xxxxxxx")
 //        @Column(name = "business_member_store_number")

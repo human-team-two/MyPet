@@ -206,12 +206,6 @@ public class memberController {
         }
     }
 
-    @GetMapping("/Login/error")
-    public String loginError(Model model){
-        model.addAttribute("loginErroMsg", "아이디 또는 비밀번호를 확인해주세요.");
-        return "redirect:/Member/Login";
-    }
-
 
 
     //로그아웃

@@ -201,6 +201,7 @@ public class memberController {
             System.out.println("로그인 됐습니다!");
             return "redirect:/Member/loginPage";
         }else {
+            model.addAttribute("loginErroMsg", "아이디 비밀번호를 확인해주세요");
             System.out.println("아이디, 비밀번호 다시 입력해주세요!");
             return "redirect:/Member/Login";
         }

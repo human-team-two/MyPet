@@ -73,6 +73,7 @@ dependencies {
 
     // 스프링부트 시큐리
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 }
 
 //테스트 라이브러리 정보

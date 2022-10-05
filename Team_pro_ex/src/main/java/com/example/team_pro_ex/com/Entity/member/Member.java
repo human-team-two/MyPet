@@ -25,6 +25,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 @DynamicInsert
 @DynamicUpdate
+@Table(name = "users")
 public class Member extends member_BaseEntity {
 
 
@@ -40,11 +41,13 @@ public class Member extends member_BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long member_Number_Seq;
 
+
     @Column(name = "member_id", length = 20, nullable = false, unique = true)
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z]).{8,16}", message = "아이디는 8~16자 영문 소문자, 숫자를 사용하세요.")
     private String id;  // 아이디
 
-    @Column(name = "member_password")
+    @Column(name = "member_password",length = 18)
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호는 8~16자 영문 대 소문자, 숫자를 포함한 특수문자를 사용하세요.")
     private String password; // 비밀번호
 
     @Column(name = "member_name")
@@ -72,9 +75,8 @@ public class Member extends member_BaseEntity {
     private Integer petW; //--펫 몸무게
 
     //권한에 대해 부여하기 위해서 변수를 만듬 : 관리자, 회원, 사업자를 나누기 위해서
-    private String role;
-
-
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "member_join_M", length = 1, nullable = false)
     private String joinM = "Y"; //--가입상태

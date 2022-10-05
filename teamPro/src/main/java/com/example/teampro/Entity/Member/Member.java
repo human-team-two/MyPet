@@ -1,14 +1,12 @@
-package com.example.team_pro_ex.com.Entity.member;
+package com.example.teampro.Entity.Member;
 
-import com.example.team_pro_ex.com.Entity.Base.member_BaseEntity;
+
+import com.example.teampro.Entity.baseEntity.baseTimeEntity;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 //@AllArgsConstructor : 모든 매개변수를 갖는 생성자
@@ -25,9 +23,8 @@ import javax.validation.constraints.Pattern;
 @Builder
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "users")
-public class Member extends member_BaseEntity {
-
+@Table(name="member")
+public class Member extends baseTimeEntity{
 
     //builder패턴을 쓰면 중요하다고 생각 되는 것들은 builder를 사용하여 관리를 하고
     //그 외 요소들은 setter로 받는다.
@@ -64,23 +61,11 @@ public class Member extends member_BaseEntity {
     @Column(name = "member_address", length = 50)
     private String address; // 주소
 
-    @Column(name = "member_pet_T", length = 20)
-    private String petT; //--펫 종류
-
-    @Pattern(regexp = "(?=.*[0-9])(?=.*\\W)(?=\\S+$).{10}", message = "애견,애묘의 출생일은 예)20220901")
-    @Column(name = "member_pet_D")
-    private String petD; //-- 펫 출생
-
-    @Column(name = "member_pet_W", length = 10)
-    private Integer petW; //--펫 몸무게
-
     //권한에 대해 부여하기 위해서 변수를 만듬 : 관리자, 회원, 사업자를 나누기 위해서
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
 
     @Column(name = "member_join_M", length = 1, nullable = false)
     private String joinM = "Y"; //--가입상태
 
 
 }
-

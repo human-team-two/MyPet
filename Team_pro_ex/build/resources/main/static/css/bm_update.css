@@ -44,6 +44,10 @@ article {
 .content strong {
   display: block;
 }
+.content .form-1 a {
+  display: block;
+  margin: 1em 0;
+}
 
 p.border, input.border, button.border {
   width: 24rem;

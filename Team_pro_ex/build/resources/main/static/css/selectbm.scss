@@ -1,0 +1,21 @@
+article {
+  form {
+    display:flex;
+    height:10em;
+    justify-content: center;
+    align-items: flex-end;
+
+    input:first-of-type {
+      border: 1px solid red;
+      width: 9em;
+      height:3em;
+    }
+
+    input:last-of-type{
+      border:none;
+      width: 9em;
+      height:3em;
+
+    }
+  }
+}

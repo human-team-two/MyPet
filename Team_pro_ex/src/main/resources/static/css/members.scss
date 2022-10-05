@@ -1,0 +1,24 @@
+$mainColor: #f7323f;
+
+body {
+  width: 100%;
+
+  article {
+    @include body;
+
+    table {
+      @include body;
+
+      tr {
+        @include body;
+
+        th {
+          background: $mainColor;
+        }
+
+        td {
+        }
+      }
+    }
+  }
+}

@@ -73,6 +73,9 @@ dependencies {
 
     // 스프링부트 시큐리
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //스프링부트 devtools
+    runtimeOnly('org.springframework.boot:spring-boot-devtools')
 }
 
 //테스트 라이브러리 정보

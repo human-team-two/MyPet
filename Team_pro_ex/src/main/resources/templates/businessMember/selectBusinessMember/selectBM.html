@@ -6,12 +6,13 @@
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/selectbm.css">
 </head>
 <body>
 <header th:replace="common/header :: header"></header>
 <article>
 <form th:action="@{/businessMember/selectBusinessMember/selectBM}" method="post">
-    <td><input name="phoneNumber" type="text" th:placeholder="phoneNumber"></td>
+    <input name="phoneNumber" type="text" th:placeholder="phoneNumber">
     <input type="submit" value="회원찾기">
 </form>
 </article>

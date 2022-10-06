@@ -1,3 +1,4 @@
+$header-backcolor:#f7323f;
 article {
   form {
     display:flex;
@@ -6,7 +7,7 @@ article {
     align-items: flex-end;
 
     input:first-of-type {
-      border: 1px solid red;
+      border: 1px solid $header-backcolor;
       width: 9em;
       height:3em;
     }

@@ -1,19 +1,19 @@
-$mainColor: #f7323f;
+$header-backcolor:#f7323f;
 
 body {
   width: 100%;
 
   article {
-    @include body;
+    @extend body;
 
     table {
-      @include body;
+      @extend body;
 
       tr {
-        @include body;
+        @extend body;
 
         th {
-          background: $mainColor;
+          background: $header-backcolor;
         }
 
         td {

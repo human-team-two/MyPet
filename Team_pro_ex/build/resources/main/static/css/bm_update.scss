@@ -1,4 +1,4 @@
-/*border: 0.1em solid #1f2024;*/
+$header-backcolor:#f7323f;
 
 article {
   padding: 0;
@@ -6,7 +6,7 @@ article {
 
 .bmupdate-info {
   padding-top: 4em;
-  background-color: #f7323f;
+  background-color: $header-backcolor;
   color: #f0f0f0;
 }
 
@@ -36,7 +36,7 @@ article {
     font-weight: bold;
 
     a.bmupdate-select {
-      color: #f7323f;
+      color: $header-backcolor;
     }
   }
 }

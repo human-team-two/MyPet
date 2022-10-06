@@ -75,6 +75,7 @@ public class Member extends member_BaseEntity {
     private String role;
 
 
+
     @Column(name = "member_join_M", length = 1, nullable = false)
     private String joinM = "Y"; //--가입상태
 

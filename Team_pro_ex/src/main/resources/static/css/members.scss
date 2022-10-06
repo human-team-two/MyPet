@@ -1,4 +1,4 @@
-$mainColor: #f7323f;
+$header-backcolor:#f7323f;
 
 body {
   width: 100%;
@@ -13,7 +13,7 @@ body {
         @include body;
 
         th {
-          background: $mainColor;
+          background: $header-backcolor;
         }
 
         td {

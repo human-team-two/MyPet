@@ -5,7 +5,7 @@ article form {
   align-items: flex-end;
 }
 article form input:first-of-type {
-  border: 1px solid red;
+  border: 1px solid #f7323f;
   width: 9em;
   height: 3em;
 }

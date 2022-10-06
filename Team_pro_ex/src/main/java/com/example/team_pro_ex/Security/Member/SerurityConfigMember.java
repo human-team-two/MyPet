@@ -1,12 +1,15 @@
 package com.example.team_pro_ex.Security.Member;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 
@@ -17,7 +20,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
 
     //로그인 실패 핸들러 의존성 주입
-    private final AuthenticationFailureHandler costomFailurHandler;
+    private final AuthenticationFailureHandler customAuthFailureHandler;
 
     @Override
     public void configure(WebSecurity web) throws Exception{
@@ -36,7 +39,7 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 //페이지 권한설정 => 매니저의 권한을 넣으려면 Member옆에 access와 같이 입력을 해줘야한다.
                 //시큐리티 권한을 사용하려면 반드시 ROLE_MEMBER와 같이 사용하여야 한다.
                 .regexMatchers("/Member/[^(mJoin/Join)|(Login)].*").
-                access("hasRole('ROLE_manager') or hasRole('ROLE_Member')")
+                access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MEMBER')")
                 .regexMatchers("/businessMember/[^(bmJoin/bm_Join)].*").
                 access("hasRole('ROLE_manager') or hasRole('ROLE_ADMIN')")
                 //설정해준거 외에는 어디든지 접근가능하다. .anyRequest().permitAll()
@@ -45,8 +48,10 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 //로그인 권한설정
                 .formLogin()
                 .loginPage("/Member/Login")
+                .usernameParameter("id")
+                .loginProcessingUrl("/logins")
                 .defaultSuccessUrl("/")
-                .failureHandler(customFailureHandler)
+                .failureHandler(customAuthFailureHandler)
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -57,6 +62,11 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/index");
 
     }
+    @Bean
+    public BCryptPasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
 
 }

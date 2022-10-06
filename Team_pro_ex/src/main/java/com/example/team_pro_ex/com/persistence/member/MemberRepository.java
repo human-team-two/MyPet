@@ -17,7 +17,7 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     //아이디 찾기? = 아이디가 완전히 일치해야 됨 = like로 해결가능
     @Query(value = "select m from Member m where m.id = :id")
-    Member findMemberById(String id);
+    Member findById(@Param("id") String id);
 
     //아이디 찾기
     List<Member> findByIdContains(String id);

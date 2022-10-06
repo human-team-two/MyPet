@@ -17,7 +17,6 @@ import java.util.Map;
 // 세션에 상태 정보를 저장할 때 사용하는데, @SessionAttributes 뒤에 ("member") 라고 설정했기 때문에
 // "member" 라는 이름으로 저장된 데이터를 자동으로 세션으로 등록
 @RequestMapping(path = "/Member")
-@RequiredArgsConstructor
 public class memberController {
 
     private final memberService memberService;
@@ -108,10 +107,11 @@ public class memberController {
             memberService.insertMember(member);
         }
 
-
-
         return "redirect:/Member/Login";
     }
+
+
+
 
 
     @GetMapping("/mUpdate/Update") //마이 페이지 수정폼
@@ -182,26 +182,14 @@ public class memberController {
 
     //로그인
     @GetMapping("/Login")
-    public void loginView(){
+    public String login(@RequestParam(value = "error", required = false)String error,
+                        @RequestParam(value = "exception", required = false)String exception,
+                        Model model) {
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
+        return "/Member/Login";
     }
-    //로그인
-    @PostMapping("/Login")
-    public String login(Member member, Model model){
-        Member findMember = memberService.getMember(member);
-        // 아이디, 비번 알치해야지 로그인 가능
-        // 회원 로그인을 할 경우 아이디와 비밀번호가 일치하지 않으면 로그인 페이지로 되돌아 온다.
-        // 로그인 성공시 회원 페이지로 이동
-        if(findMember != null
-                && findMember.getPassword().equals(member.getPassword())
-                && findMember.getId().equals(member.getId())){
-            model.addAttribute("member", findMember);
-            System.out.println("로그인 됐습니다!");
-            return "redirect:/Member/loginPage";
-        }else {
-            System.out.println("아이디, 비밀번호 다시 입력해주세요!");
-            return "redirect:/Member/Login";
-        }
-    }
+
     //로그아웃
     @GetMapping("/logout")
     public String logout(SessionStatus status){

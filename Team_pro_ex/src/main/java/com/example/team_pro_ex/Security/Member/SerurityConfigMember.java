@@ -3,6 +3,7 @@ package com.example.team_pro_ex.Security.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -41,7 +42,7 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 .regexMatchers("/Member/[^(mJoin/Join)|(Login)].*").
                 access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MEMBER')")
                 .regexMatchers("/businessMember/[^(bmJoin/bm_Join)].*").
-                access("hasRole('ROLE_manager') or hasRole('ROLE_ADMIN')")
+                access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
                 //설정해준거 외에는 어디든지 접근가능하다. .anyRequest().permitAll()
                 .anyRequest().permitAll()
                 .and()
@@ -62,6 +63,25 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/index");
 
     }
+
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //auth.inMemoryAuthentication() => 메모리 상에 존재하는 계정을 만들 수 있다. 서버를 껏다 키면,
+        // 이 계정은 새로 만들어지거나 없어진다
+
+        //withUser() => 사용할 계정명을 설정한다.
+
+        //password() => 사용할 비밀번호를 설정한다. 이 때 반드시 passwordEncoder를 이용해서 비밀번호를 복호화해야한다.
+        // 그렇지 않으면 Exception이 발생한다.
+
+        //roles()  =>계정의 권한을 설정한다.
+        String password = encoder().encode("1111");
+        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ROLE_ADMIN", "ROLE_MEMBER");
+        auth.inMemoryAuthentication().withUser("manager").password(password).roles("ROLE_ADMIN","ROLE_MANAGER","ROLE_MEMBER");
+    }
+
+
     @Bean
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();

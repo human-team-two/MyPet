@@ -195,7 +195,7 @@ public class memberController {
     public String logout(SessionStatus status){
         status.setComplete();
         System.out.println("로그아웃");
-        return "redirect:index";
+        return "redirect:/Member/Login";
     }
 
     @GetMapping("/loginPage")

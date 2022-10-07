@@ -1,5 +1,6 @@
 package com.example.team_pro_ex.Security.Member;
 
+import com.example.team_pro_ex.com.Entity.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+
+import javax.sql.DataSource;
 
 
 @RequiredArgsConstructor
@@ -56,7 +59,7 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/Member/Login")
+                .logoutSuccessUrl("/logins")
                 //로그아웃 후 세션 전체 삭제여부
                 .invalidateHttpSession(true).deleteCookies("JSESSIONID", "remember-me")
                 .and()
@@ -66,7 +69,9 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Override
+     @Override
+     // 이거는 메모리에서 우리꺼로 하자면 사용자와 사업자, 관리자를 만듬
+     // 로그인을 할 때 우리 디비에 있는 사용자의 아이디를 사용할수가 없어....
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //auth.inMemoryAuthentication() => 메모리 상에 존재하는 계정을 만들 수 있다. 서버를 껏다 키면,
         // 이 계정은 새로 만들어지거나 없어진다
@@ -78,8 +83,8 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
 
         //roles()  =>계정의 권한을 설정한다.
         String password = encoder().encode("1111");
-        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ROLE_ADMIN", "ROLE_MANAGER");
-        auth.inMemoryAuthentication().withUser("manager").password(password).roles("ROLE_ADMIN","ROLE_MANAGER","ROLE_MEMBER");
+        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ADMIN", "MANAGER");
+        auth.inMemoryAuthentication().withUser("manager").password(password).roles("ADMIN","MANAGER","MEMBER");
     }
 
 

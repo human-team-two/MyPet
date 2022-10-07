@@ -46,7 +46,8 @@ public class Member extends member_BaseEntity {
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z]).{8,16}", message = "아이디는 8~16자 영문 소문자, 숫자를 사용하세요.")
     private String id;  // 아이디
 
-    @Column(name = "member_password")
+    @Column(name = "member_password",length = 70)
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,70}", message = "영문 대 소문자, 숫자를 포함한 특수문자를 사용하세요.")
     private String password; // 비밀번호
 
     @Column(name = "member_name")

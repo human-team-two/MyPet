@@ -78,7 +78,7 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
 
         //roles()  =>계정의 권한을 설정한다.
         String password = encoder().encode("1111");
-        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ROLE_ADMIN", "ROLE_MEMBER");
+        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ROLE_ADMIN", "ROLE_MANAGER");
         auth.inMemoryAuthentication().withUser("manager").password(password).roles("ROLE_ADMIN","ROLE_MANAGER","ROLE_MEMBER");
     }
 

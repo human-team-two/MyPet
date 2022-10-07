@@ -57,6 +57,7 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/Member/Login")
+                //로그아웃 후 세션 전체 삭제여부
                 .invalidateHttpSession(true).deleteCookies("JSESSIONID", "remember-me")
                 .and()
                 //403 예외처리 핸들링

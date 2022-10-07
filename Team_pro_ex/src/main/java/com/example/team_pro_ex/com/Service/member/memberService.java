@@ -41,6 +41,7 @@ public interface memberService {
     //아이디 찾기 = 아이디를 입력해서 찾기 = 정확하게 아이디를 입력해야 한다.
     Member getMemberWhereId(String id);
 
+    void idCheck(Member member);
 
 
 }

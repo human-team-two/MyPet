@@ -6,6 +6,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -44,8 +45,8 @@ public class Member extends member_BaseEntity {
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z]).{8,16}", message = "아이디는 8~16자 영문 소문자, 숫자를 사용하세요.")
     private String id;  // 아이디
 
-    @Column(name = "member_password",length = 18)
-    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호는 8~16자 영문 대 소문자, 숫자를 포함한 특수문자를 사용하세요.")
+    @Column(name = "member_password",length = 70)
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,70}", message = "영문 대 소문자, 숫자를 포함한 특수문자를 사용하세요.")
     private String password; // 비밀번호
 
     @Column(name = "member_name")
@@ -65,7 +66,6 @@ public class Member extends member_BaseEntity {
     @Column(name = "member_pet_T", length = 20)
     private String petT; //--펫 종류
 
-
     @Pattern(regexp = "(?=.*[0-9])(?=.*\\W)(?=\\S+$).{10}", message = "애견,애묘의 출생일은 예)20220901")
     @Column(name = "member_pet_D")
     private String petD; //-- 펫 출생
@@ -73,13 +73,10 @@ public class Member extends member_BaseEntity {
     @Column(name = "member_pet_W", length = 10)
     private Integer petW; //--펫 몸무게
 
-    //권한에 대해 부여하기 위해서 변수를 만듬 : 관리자, 회원, 사업자를 나누기 위해서
     private String role;
 
     @Column(name = "member_join_M", length = 1, nullable = false)
     private String joinM = "Y"; //--가입상태
-
-
 
 
 }

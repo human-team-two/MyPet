@@ -2,7 +2,9 @@ package com.example.team_pro_ex.com.Service.member;
 
 import com.example.team_pro_ex.com.Entity.member.Member;
 import com.example.team_pro_ex.com.persistence.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -11,15 +13,14 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class memberServiceImpl implements memberService{
 
     //persistence.account_info => MemberRepository에 있는 CrudRepository<Member, Long> 사용
     private final MemberRepository memberRepo;
 
-    @Autowired
-    protected memberServiceImpl(MemberRepository memberRepo){
-        this.memberRepo = memberRepo;
-    }
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     //회원 전체조회
     @Override
@@ -99,17 +100,18 @@ public class memberServiceImpl implements memberService{
     //회원가입 및 중복체크
     @Override
     public void insertMember(Member member) {
+        idCheck(member);
+        member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
         memberRepo.save(member);
-        System.out.println("--------회원가입---------");
-        Member findMember = memberRepo.findMemberById(member.getId());
-        if(findMember != null){
-            System.out.println("중복된 아이디 입니다.");
-        }else{
-
-        }
     }
 
-
+    @Override
+    public void idCheck(Member member) {
+        Member findMember = memberRepo.findById(member.getId());
+        if(findMember != null){
+            throw  new IllegalStateException("이미 가입된 회원입니다.");
+        }
+    }
 
 
 
@@ -124,8 +126,9 @@ public class memberServiceImpl implements memberService{
 
     @Override
     public Member getMemberWhereId(String id) {
-        return memberRepo.findMemberById(id);
+        return memberRepo.findById(id);
     }
+
 
 
 

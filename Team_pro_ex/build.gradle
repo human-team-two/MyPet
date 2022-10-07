@@ -73,9 +73,17 @@ dependencies {
 
     // 스프링부트 시큐리
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
-    //스프링부트 devtools
-    runtimeOnly('org.springframework.boot:spring-boot-devtools')
+
+    //자바 11버전 의존성 추가
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.1'
+
+
+
+
 }
 
 //테스트 라이브러리 정보

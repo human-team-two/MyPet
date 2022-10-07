@@ -100,11 +100,18 @@ public class memberServiceImpl implements memberService{
     //회원가입 및 중복체크
     @Override
     public void insertMember(Member member) {
+        idCheck(member);
         member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
         memberRepo.save(member);
     }
 
-
+    @Override
+    public void idCheck(Member member) {
+        Member findMember = memberRepo.findById(member.getId());
+        if(findMember != null){
+            throw  new IllegalStateException("이미 가입된 회원입니다.");
+        }
+    }
 
 
 
@@ -121,6 +128,7 @@ public class memberServiceImpl implements memberService{
     public Member getMemberWhereId(String id) {
         return memberRepo.findById(id);
     }
+
 
 
 

@@ -43,9 +43,9 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 //페이지 권한설정 => 매니저의 권한을 넣으려면 Member옆에 access와 같이 입력을 해줘야한다.
                 //시큐리티 권한을 사용하려면 반드시 ROLE_MEMBER와 같이 사용하여야 한다.
                 .regexMatchers("/Member/[^(mJoin/Join)|(Login)].*").
-                access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MEMBER')")
-                .regexMatchers("/businessMember/[^(bmJoin/bm_Join)].*").
-                access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+                access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MEMBER') or hasRole('ROLE_MANAGER')")
+//                .regexMatchers("/businessMember/[^(bmJoin/bm_Join)].*").
+//                access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
                 //설정해준거 외에는 어디든지 접근가능하다. .anyRequest().permitAll()
                 .anyRequest().permitAll()
                 .and()
@@ -69,23 +69,23 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
     }
 
 
-     @Override
-     // 이거는 메모리에서 우리꺼로 하자면 사용자와 사업자, 관리자를 만듬
-     // 로그인을 할 때 우리 디비에 있는 사용자의 아이디를 사용할수가 없어....
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.inMemoryAuthentication() => 메모리 상에 존재하는 계정을 만들 수 있다. 서버를 껏다 키면,
-        // 이 계정은 새로 만들어지거나 없어진다
-
-        //withUser() => 사용할 계정명을 설정한다.
-
-        //password() => 사용할 비밀번호를 설정한다. 이 때 반드시 passwordEncoder를 이용해서 비밀번호를 복호화해야한다.
-        // 그렇지 않으면 Exception이 발생한다.
-
-        //roles()  =>계정의 권한을 설정한다.
-        String password = encoder().encode("1111");
-        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ADMIN", "MANAGER");
-        auth.inMemoryAuthentication().withUser("manager").password(password).roles("ADMIN","MANAGER","MEMBER");
-    }
+//     @Override
+//     // 이거는 메모리에서 우리꺼로 하자면 사용자와 사업자, 관리자를 만듬
+//     // 로그인을 할 때 우리 디비에 있는 사용자의 아이디를 사용할수가 없어....
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        //auth.inMemoryAuthentication() => 메모리 상에 존재하는 계정을 만들 수 있다. 서버를 껏다 키면,
+//        // 이 계정은 새로 만들어지거나 없어진다
+//
+//        //withUser() => 사용할 계정명을 설정한다.
+//
+//        //password() => 사용할 비밀번호를 설정한다. 이 때 반드시 passwordEncoder를 이용해서 비밀번호를 복호화해야한다.
+//        // 그렇지 않으면 Exception이 발생한다.
+//
+//        //roles()  =>계정의 권한을 설정한다.
+//        String password = encoder().encode("1111");
+//        auth.inMemoryAuthentication().withUser("admin").password(password).roles("ADMIN", "MANAGER");
+//        auth.inMemoryAuthentication().withUser("manager").password(password).roles("ADMIN","MANAGER","MEMBER");
+//    }
 
 
     @Bean

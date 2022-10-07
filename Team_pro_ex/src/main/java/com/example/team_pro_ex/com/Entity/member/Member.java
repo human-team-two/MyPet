@@ -25,7 +25,6 @@ import javax.validation.constraints.Pattern;
 @Builder
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "users")
 public class Member extends member_BaseEntity {
 
 
@@ -74,7 +73,7 @@ public class Member extends member_BaseEntity {
     @Column(name = "member_pet_W", length = 10)
     private Integer petW; //--펫 몸무게
 
-    private Role role;
+    private String role;
 
     @Column(name = "member_join_M", length = 1, nullable = false)
     private String joinM = "Y"; //--가입상태

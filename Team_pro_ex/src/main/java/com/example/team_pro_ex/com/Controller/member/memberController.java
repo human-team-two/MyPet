@@ -38,7 +38,7 @@ public class memberController {
                 memberService.getMemberList()));
         return  "/Member/memberList/members";
     }
-
+    //일반 회원가입
     @GetMapping("/mJoin/Join")
     public String insertMember(Member member, Model model){
         System.out.println("get mapping account !!");
@@ -63,6 +63,7 @@ public class memberController {
         model.addAttribute("member", member_1);
         return "Member/mJoin/Join";
     }
+    //일반 회원가입
     @PostMapping("/mJoin/Join")
     public String insertMember(@Valid Member member, Errors errors, Model model){
         System.out.println("---check---");
@@ -98,20 +99,17 @@ public class memberController {
             }
             return "/Member/mJoin/Join";
         }
-
-        Member findMember = memberService.getMemberWhereId(member.getId());
-        if(findMember != null){
-            System.out.println("아이디 중복  : " + member.getId());
-        }else{
-            System.out.println("회원가입 : " + member.getId());
-            memberService.insertMember(member);
-        }
+//        Member findMember = memberService.getMemberWhereId(member.getId());
+//        if(findMember != null){
+//            System.out.println("아이디 중복  : " + member.getId());
+//        }else{
+//            System.out.println("회원가입 : " + member.getId());
+//
+//        }
+        memberService.insertMember(member);
 
         return "redirect:/Member/Login";
     }
-
-
-
 
 
     @GetMapping("/mUpdate/Update") //마이 페이지 수정폼

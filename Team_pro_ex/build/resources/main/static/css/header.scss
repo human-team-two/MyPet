@@ -1,5 +1,4 @@
-/*border:2px solid blue;*/
-
+$header-backcolor:#f7323f;
 @media (max-width: 375px) {
   #header {
     width: 100px;
@@ -20,7 +19,7 @@
   padding: 0 2em;
   grid-template-columns: 2fr 3fr 2fr;
   position: fixed;
-  background-color: #f7323f;
+  background-color: $header-backcolor;
 
   /*max-width: 962px;*/
   min-width: 375px;

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.shop.service.ItemServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-03T14:35:58" hostname="DESKTOP-FGHQJHJ" time="0.888">
+  <properties/>
+  <testcase name="상품 등록 테스트" classname="com.shop.service.ItemServiceTest" time="0.888"/>
+  <system-out><![CDATA[23:35:48.972 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+23:35:48.989 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+23:35:49.044 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.shop.service.ItemServiceTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+23:35:49.061 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.shop.service.ItemServiceTest], using SpringBootContextLoader
+23:35:49.066 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.shop.service.ItemServiceTest]: class path resource [com/shop/service/ItemServiceTest-context.xml] does not exist
+23:35:49.066 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.shop.service.ItemServiceTest]: class path resource [com/shop/service/ItemServiceTestContext.groovy] does not exist
+23:35:49.067 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.shop.service.ItemServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+23:35:49.067 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.shop.service.ItemServiceTest]: ItemServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:35:49.132 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.shop.service.ItemServiceTest]
+23:35:49.234 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\02sample\09shop\09shop\shop\build\classes\java\main\com\shop\ShopApplication.class]
+23:35:49.236 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.shop.ShopApplication for test class com.shop.service.ItemServiceTest
+23:35:49.453 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.shop.service.ItemServiceTest]: using defaults.
+23:35:49.454 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+23:35:49.486 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@38d5b107, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6650813a, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@44ea608c, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@50cf5a23, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@450794b4, org.springframework.test.context.support.DirtiesContextTestExecutionListener@273c947f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@30457e14, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1af1347d, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@632aa1a3, org.springframework.test.context.event.EventPublishingTestExecutionListener@20765ed5, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@3b582111, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@2899a8db, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@1e8823d2, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@c1a4620, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@76b0ae1b, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@130a0f66, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4c432866]
+23:35:49.493 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@3c49fab6 testClass = ItemServiceTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@515f4131 testClass = ItemServiceTest, locations = '{}', classes = '{class com.shop.ShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@1623134f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@339bf286, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@7bc10d84, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7e38a7fe, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@56f6d40b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@127a7a2e], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.3)
+
+2022-10-03 23:35:50.015  INFO 5200 --- [    Test worker] com.shop.service.ItemServiceTest         : Starting ItemServiceTest using Java 17.0.3 on DESKTOP-FGHQJHJ with PID 5200 (started by pmy1050 in C:\02sample\09shop\09shop\shop)
+2022-10-03 23:35:50.017  INFO 5200 --- [    Test worker] com.shop.service.ItemServiceTest         : No active profile set, falling back to 1 default profile: "default"
+2022-10-03 23:35:51.606  INFO 5200 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-10-03 23:35:51.758  INFO 5200 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 132 ms. Found 7 JPA repository interfaces.
+2022-10-03 23:35:52.728  INFO 5200 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-10-03 23:35:52.878  INFO 5200 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2022-10-03 23:35:53.177  INFO 5200 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-10-03 23:35:53.438  INFO 5200 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-10-03 23:35:53.666  INFO 5200 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-10-03 23:35:53.689  INFO 5200 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: 
+    
+    drop table if exists cart CASCADE 
+Hibernate: 
+    
+    drop table if exists cart_item CASCADE 
+Hibernate: 
+    
+    drop table if exists item CASCADE 
+Hibernate: 
+    
+    drop table if exists item_img CASCADE 
+Hibernate: 
+    
+    drop table if exists member CASCADE 
+Hibernate: 
+    
+    drop table if exists order_item CASCADE 
+Hibernate: 
+    
+    drop table if exists orders CASCADE 
+Hibernate: 
+    
+    drop sequence if exists hibernate_sequence
+Hibernate: create sequence hibernate_sequence start with 1 increment by 1
+Hibernate: 
+    
+    create table cart (
+       cart_id bigint not null,
+        reg_time timestamp,
+        update_time timestamp,
+        created_by varchar(255),
+        modified_by varchar(255),
+        member_id bigint,
+        primary key (cart_id)
+    )
+Hibernate: 
+    
+    create table cart_item (
+       cart_item_id bigint not null,
+        reg_time timestamp,
+        update_time timestamp,
+        created_by varchar(255),
+        modified_by varchar(255),
+        count integer not null,
+        cart_id bigint,
+        item_id bigint,
+        primary key (cart_item_id)
+    )
+Hibernate: 
+    
+    create table item (
+       item_id bigint not null,
+        reg_time timestamp,
+        update_time timestamp,
+        created_by varchar(255),
+        modified_by varchar(255),
+        item_detail clob not null,
+        item_nm varchar(50) not null,
+        item_sell_status varchar(255),
+        price integer not null,
+        stock_number integer not null,
+        primary key (item_id)
+    )
+Hibernate: 
+    
+    create table item_img (
+       item_img_id bigint not null,
+        reg_time timestamp,
+        update_time timestamp,
+        created_by varchar(255),
+        modified_by varchar(255),
+        img_name varchar(255),
+        img_url varchar(255),
+        ori_img_name varchar(255),
+        repimg_yn varchar(255),
+        item_id bigint,
+        primary key (item_img_id)
+    )
+Hibernate: 
+    
+    create table member (
+       member_id bigint not null,
+        reg_time timestamp,
+        update_time timestamp,
+        created_by varchar(255),
+        modified_by varchar(255),
+        address varchar(255),
+        email varchar(255),
+        name varchar(255),
+        password varchar(255),
+        role varchar(255),
+        primary key (member_id)
+    )
+Hibernate: 
+    
+    create table order_item (
+       order_item_id bigint not null,
+        reg_time timestamp,
+        update_time timestamp,
+        created_by varchar(255),
+        modified_by varchar(255),
+        count integer not null,
+        order_price integer not null,
+        item_id bigint,
+        order_id bigint,
+        primary key (order_item_id)
+    )
+Hibernate: 
+    
+    create table orders (
+       order_id bigint not null,
+        reg_time timestamp,
+        update_time timestamp,
+        created_by varchar(255),
+        modified_by varchar(255),
+        order_date timestamp,
+        order_status varchar(255),
+        member_id bigint,
+        primary key (order_id)
+    )
+Hibernate: 
+    
+    alter table member 
+       add constraint UK_mbmcqelty0fbrvxp1q58dn57t unique (email)
+Hibernate: 
+    
+    alter table cart 
+       add constraint FKix170nytunweovf2v9137mx2o 
+       foreign key (member_id) 
+       references member
+Hibernate: 
+    
+    alter table cart_item 
+       add constraint FK1uobyhgl1wvgt1jpccia8xxs3 
+       foreign key (cart_id) 
+       references cart
+Hibernate: 
+    
+    alter table cart_item 
+       add constraint FKdljf497fwm1f8eb1h8t6n50u9 
+       foreign key (item_id) 
+       references item
+Hibernate: 
+    
+    alter table item_img 
+       add constraint FKdd5u08y3ap4c46ayrqjf8g88m 
+       foreign key (item_id) 
+       references item
+Hibernate: 
+    
+    alter table order_item 
+       add constraint FKija6hjjiit8dprnmvtvgdp6ru 
+       foreign key (item_id) 
+       references item
+Hibernate: 
+    
+    alter table order_item 
+       add constraint FKt4dc2r9nbvbujrljv3e23iibt 
+       foreign key (order_id) 
+       references orders
+Hibernate: 
+    
+    alter table orders 
+       add constraint FKpktxwhj3x9m4gth5ff6bkqgeb 
+       foreign key (member_id) 
+       references member
+2022-10-03 23:35:54.885  INFO 5200 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-10-03 23:35:54.897  INFO 5200 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-10-03 23:35:56.639  WARN 5200 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-10-03 23:35:57.450  INFO 5200 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@18a538a0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@70736b19, org.springframework.security.web.context.SecurityContextPersistenceFilter@77737e3e, org.springframework.security.web.header.HeaderWriterFilter@5dcec8e9, org.springframework.security.web.csrf.CsrfFilter@3956e933, org.springframework.security.web.authentication.logout.LogoutFilter@46c093b4, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@40e41f88, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b6cf3c1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@702e21c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@183e64a8, org.springframework.security.web.session.SessionManagementFilter@1851f19f, org.springframework.security.web.access.ExceptionTranslationFilter@4b8ba6b7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5c00de0d]
+2022-10-03 23:35:58.434  INFO 5200 --- [    Test worker] com.shop.service.ItemServiceTest         : Started ItemServiceTest in 8.878 seconds (JVM running for 10.996)
+Hibernate: 
+    call next value for hibernate_sequence
+Hibernate: 
+    call next value for hibernate_sequence
+Hibernate: 
+    call next value for hibernate_sequence
+Hibernate: 
+    call next value for hibernate_sequence
+Hibernate: 
+    call next value for hibernate_sequence
+Hibernate: 
+    call next value for hibernate_sequence
+Hibernate: 
+    insert 
+    into
+        item
+        (reg_time, update_time, created_by, modified_by, item_detail, item_nm, item_sell_status, price, stock_number, item_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-10-03 23:35:59.082 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2022-10-03T23:35:58.985009700]
+2022-10-03 23:35:59.085 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2022-10-03T23:35:58.985009700]
+2022-10-03 23:35:59.085 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.085 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.086 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [CLOB] - [테스트 상품 입니다.]
+2022-10-03 23:35:59.090 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [테스트상품]
+2022-10-03 23:35:59.090 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [VARCHAR] - [SELL]
+2022-10-03 23:35:59.092 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [8] as [INTEGER] - [1000]
+2022-10-03 23:35:59.092 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [9] as [INTEGER] - [100]
+2022-10-03 23:35:59.093 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [10] as [BIGINT] - [1]
+Hibernate: 
+    insert 
+    into
+        item_img
+        (reg_time, update_time, created_by, modified_by, img_name, img_url, item_id, ori_img_name, repimg_yn, item_img_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-10-03 23:35:59.098 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2022-10-03T23:35:59.042943500]
+2022-10-03 23:35:59.099 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2022-10-03T23:35:59.042943500]
+2022-10-03 23:35:59.099 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.099 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.099 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [f57c0030-ca5b-4ab8-a147-03cc69a09657.jpg]
+2022-10-03 23:35:59.099 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [/images/item/f57c0030-ca5b-4ab8-a147-03cc69a09657.jpg]
+2022-10-03 23:35:59.099 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [BIGINT] - [1]
+2022-10-03 23:35:59.099 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [8] as [VARCHAR] - [image0.jpg]
+2022-10-03 23:35:59.099 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [9] as [VARCHAR] - [Y]
+2022-10-03 23:35:59.099 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [10] as [BIGINT] - [2]
+Hibernate: 
+    insert 
+    into
+        item_img
+        (reg_time, update_time, created_by, modified_by, img_name, img_url, item_id, ori_img_name, repimg_yn, item_img_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-10-03 23:35:59.101 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2022-10-03T23:35:59.047938300]
+2022-10-03 23:35:59.101 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2022-10-03T23:35:59.047938300]
+2022-10-03 23:35:59.101 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.102 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.102 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [5452ead3-c1d9-40f3-a8f8-35e4be6c21ae.jpg]
+2022-10-03 23:35:59.102 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [/images/item/5452ead3-c1d9-40f3-a8f8-35e4be6c21ae.jpg]
+2022-10-03 23:35:59.102 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [BIGINT] - [1]
+2022-10-03 23:35:59.102 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [8] as [VARCHAR] - [image1.jpg]
+2022-10-03 23:35:59.102 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [9] as [VARCHAR] - [N]
+2022-10-03 23:35:59.102 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [10] as [BIGINT] - [3]
+Hibernate: 
+    insert 
+    into
+        item_img
+        (reg_time, update_time, created_by, modified_by, img_name, img_url, item_id, ori_img_name, repimg_yn, item_img_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-10-03 23:35:59.103 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2022-10-03T23:35:59.050935100]
+2022-10-03 23:35:59.104 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2022-10-03T23:35:59.050935100]
+2022-10-03 23:35:59.104 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.104 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.104 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [1a9f3679-c1d2-46cb-a39d-fbbf347939e3.jpg]
+2022-10-03 23:35:59.104 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [/images/item/1a9f3679-c1d2-46cb-a39d-fbbf347939e3.jpg]
+2022-10-03 23:35:59.104 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [BIGINT] - [1]
+2022-10-03 23:35:59.104 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [8] as [VARCHAR] - [image2.jpg]
+2022-10-03 23:35:59.104 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [9] as [VARCHAR] - [N]
+2022-10-03 23:35:59.104 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [10] as [BIGINT] - [4]
+Hibernate: 
+    insert 
+    into
+        item_img
+        (reg_time, update_time, created_by, modified_by, img_name, img_url, item_id, ori_img_name, repimg_yn, item_img_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-10-03 23:35:59.106 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2022-10-03T23:35:59.053932100]
+2022-10-03 23:35:59.106 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2022-10-03T23:35:59.053932100]
+2022-10-03 23:35:59.106 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.106 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.107 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [8a9a0b37-27e3-4e8f-b89a-5ead2b493346.jpg]
+2022-10-03 23:35:59.107 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [/images/item/8a9a0b37-27e3-4e8f-b89a-5ead2b493346.jpg]
+2022-10-03 23:35:59.107 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [BIGINT] - [1]
+2022-10-03 23:35:59.107 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [8] as [VARCHAR] - [image3.jpg]
+2022-10-03 23:35:59.107 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [9] as [VARCHAR] - [N]
+2022-10-03 23:35:59.107 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [10] as [BIGINT] - [5]
+Hibernate: 
+    insert 
+    into
+        item_img
+        (reg_time, update_time, created_by, modified_by, img_name, img_url, item_id, ori_img_name, repimg_yn, item_img_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-10-03 23:35:59.108 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [TIMESTAMP] - [2022-10-03T23:35:59.055929600]
+2022-10-03 23:35:59.109 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [TIMESTAMP] - [2022-10-03T23:35:59.055929600]
+2022-10-03 23:35:59.109 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [3] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.109 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [4] as [VARCHAR] - [admin]
+2022-10-03 23:35:59.109 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [5] as [VARCHAR] - [6d4cd41d-8d77-4a2e-bc44-30c9dcfd05bc.jpg]
+2022-10-03 23:35:59.109 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [6] as [VARCHAR] - [/images/item/6d4cd41d-8d77-4a2e-bc44-30c9dcfd05bc.jpg]
+2022-10-03 23:35:59.112 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [BIGINT] - [1]
+2022-10-03 23:35:59.112 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [8] as [VARCHAR] - [image4.jpg]
+2022-10-03 23:35:59.112 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [9] as [VARCHAR] - [N]
+2022-10-03 23:35:59.112 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [10] as [BIGINT] - [6]
+Hibernate: 
+    select
+        itemimg0_.item_img_id as item_img1_3_,
+        itemimg0_.reg_time as reg_time2_3_,
+        itemimg0_.update_time as update_t3_3_,
+        itemimg0_.created_by as created_4_3_,
+        itemimg0_.modified_by as modified5_3_,
+        itemimg0_.img_name as img_name6_3_,
+        itemimg0_.img_url as img_url7_3_,
+        itemimg0_.item_id as item_id10_3_,
+        itemimg0_.ori_img_name as ori_img_8_3_,
+        itemimg0_.repimg_yn as repimg_y9_3_ 
+    from
+        item_img itemimg0_ 
+    left outer join
+        item item1_ 
+            on itemimg0_.item_id=item1_.item_id 
+    where
+        item1_.item_id=? 
+    order by
+        itemimg0_.item_img_id asc
+2022-10-03 23:35:59.202 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
+2022-10-03 23:35:59.210 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_img1_3_] : [BIGINT]) - [2]
+2022-10-03 23:35:59.215 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_time2_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.042944]
+2022-10-03 23:35:59.215 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([update_t3_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.042944]
+2022-10-03 23:35:59.215 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([created_4_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.216 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([modified5_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.216 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_name6_3_] : [VARCHAR]) - [f57c0030-ca5b-4ab8-a147-03cc69a09657.jpg]
+2022-10-03 23:35:59.216 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_url7_3_] : [VARCHAR]) - [/images/item/f57c0030-ca5b-4ab8-a147-03cc69a09657.jpg]
+2022-10-03 23:35:59.216 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_id10_3_] : [BIGINT]) - [1]
+2022-10-03 23:35:59.217 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([ori_img_8_3_] : [VARCHAR]) - [image0.jpg]
+2022-10-03 23:35:59.217 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([repimg_y9_3_] : [VARCHAR]) - [Y]
+2022-10-03 23:35:59.217 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_img1_3_] : [BIGINT]) - [3]
+2022-10-03 23:35:59.218 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_time2_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.047938]
+2022-10-03 23:35:59.218 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([update_t3_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.047938]
+2022-10-03 23:35:59.218 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([created_4_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.218 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([modified5_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.218 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_name6_3_] : [VARCHAR]) - [5452ead3-c1d9-40f3-a8f8-35e4be6c21ae.jpg]
+2022-10-03 23:35:59.218 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_url7_3_] : [VARCHAR]) - [/images/item/5452ead3-c1d9-40f3-a8f8-35e4be6c21ae.jpg]
+2022-10-03 23:35:59.218 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_id10_3_] : [BIGINT]) - [1]
+2022-10-03 23:35:59.218 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([ori_img_8_3_] : [VARCHAR]) - [image1.jpg]
+2022-10-03 23:35:59.218 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([repimg_y9_3_] : [VARCHAR]) - [N]
+2022-10-03 23:35:59.225 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_img1_3_] : [BIGINT]) - [4]
+2022-10-03 23:35:59.226 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_time2_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.050935]
+2022-10-03 23:35:59.226 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([update_t3_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.050935]
+2022-10-03 23:35:59.226 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([created_4_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.226 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([modified5_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.227 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_name6_3_] : [VARCHAR]) - [1a9f3679-c1d2-46cb-a39d-fbbf347939e3.jpg]
+2022-10-03 23:35:59.227 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_url7_3_] : [VARCHAR]) - [/images/item/1a9f3679-c1d2-46cb-a39d-fbbf347939e3.jpg]
+2022-10-03 23:35:59.227 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_id10_3_] : [BIGINT]) - [1]
+2022-10-03 23:35:59.227 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([ori_img_8_3_] : [VARCHAR]) - [image2.jpg]
+2022-10-03 23:35:59.227 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([repimg_y9_3_] : [VARCHAR]) - [N]
+2022-10-03 23:35:59.227 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_img1_3_] : [BIGINT]) - [5]
+2022-10-03 23:35:59.228 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_time2_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.053932]
+2022-10-03 23:35:59.230 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([update_t3_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.053932]
+2022-10-03 23:35:59.230 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([created_4_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.231 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([modified5_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.231 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_name6_3_] : [VARCHAR]) - [8a9a0b37-27e3-4e8f-b89a-5ead2b493346.jpg]
+2022-10-03 23:35:59.232 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_url7_3_] : [VARCHAR]) - [/images/item/8a9a0b37-27e3-4e8f-b89a-5ead2b493346.jpg]
+2022-10-03 23:35:59.235 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_id10_3_] : [BIGINT]) - [1]
+2022-10-03 23:35:59.236 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([ori_img_8_3_] : [VARCHAR]) - [image3.jpg]
+2022-10-03 23:35:59.237 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([repimg_y9_3_] : [VARCHAR]) - [N]
+2022-10-03 23:35:59.237 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_img1_3_] : [BIGINT]) - [6]
+2022-10-03 23:35:59.238 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_time2_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.055930]
+2022-10-03 23:35:59.242 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([update_t3_3_] : [TIMESTAMP]) - [2022-10-03T23:35:59.055930]
+2022-10-03 23:35:59.242 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([created_4_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.248 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([modified5_3_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.250 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_name6_3_] : [VARCHAR]) - [6d4cd41d-8d77-4a2e-bc44-30c9dcfd05bc.jpg]
+2022-10-03 23:35:59.250 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([img_url7_3_] : [VARCHAR]) - [/images/item/6d4cd41d-8d77-4a2e-bc44-30c9dcfd05bc.jpg]
+2022-10-03 23:35:59.250 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_id10_3_] : [BIGINT]) - [1]
+2022-10-03 23:35:59.251 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([ori_img_8_3_] : [VARCHAR]) - [image4.jpg]
+2022-10-03 23:35:59.251 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([repimg_y9_3_] : [VARCHAR]) - [N]
+Hibernate: 
+    select
+        item0_.item_id as item_id1_2_0_,
+        item0_.reg_time as reg_time2_2_0_,
+        item0_.update_time as update_t3_2_0_,
+        item0_.created_by as created_4_2_0_,
+        item0_.modified_by as modified5_2_0_,
+        item0_.item_detail as item_det6_2_0_,
+        item0_.item_nm as item_nm7_2_0_,
+        item0_.item_sell_status as item_sel8_2_0_,
+        item0_.price as price9_2_0_,
+        item0_.stock_number as stock_n10_2_0_ 
+    from
+        item item0_ 
+    where
+        item0_.item_id=?
+2022-10-03 23:35:59.317 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
+2022-10-03 23:35:59.325 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([reg_time2_2_0_] : [TIMESTAMP]) - [2022-10-03T23:35:58.985010]
+2022-10-03 23:35:59.325 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([update_t3_2_0_] : [TIMESTAMP]) - [2022-10-03T23:35:58.985010]
+2022-10-03 23:35:59.325 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([created_4_2_0_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.325 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([modified5_2_0_] : [VARCHAR]) - [admin]
+2022-10-03 23:35:59.330 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_det6_2_0_] : [CLOB]) - [테스트 상품 입니다.]
+2022-10-03 23:35:59.330 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_nm7_2_0_] : [VARCHAR]) - [테스트상품]
+2022-10-03 23:35:59.330 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([item_sel8_2_0_] : [VARCHAR]) - [SELL]
+2022-10-03 23:35:59.331 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([price9_2_0_] : [INTEGER]) - [1000]
+2022-10-03 23:35:59.332 TRACE 5200 --- [    Test worker] o.h.type.descriptor.sql.BasicExtractor   : extracted value ([stock_n10_2_0_] : [INTEGER]) - [100]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

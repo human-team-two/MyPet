@@ -1,4 +1,4 @@
-/*border: 0.1em solid #1f2024;*/
+$header-backcolor:#f7323f;
 
 article {
   padding: 0;
@@ -36,7 +36,7 @@ article {
     font-weight: bold;
 
     a.update-select {
-      color: #f7323f;
+      color: $header-backcolor;
     }
   }
 }

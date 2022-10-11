@@ -21,6 +21,7 @@ repositories {
 //라이브러리
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.jetbrains:annotations:20.1.0'
 
 
     //compile : 자바코드를 실행가능 한 바이트코드로 변경 (바이트코드르 실행하면 컴퓨터는 인식하고 실행)

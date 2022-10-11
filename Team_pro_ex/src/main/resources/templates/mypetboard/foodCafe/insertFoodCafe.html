@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>음식점 카페 등록 페이지</title>
+    <!--다음 주소 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!--부트스트랩 api -->
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<nav class="navbar navbar-light bg-dark">
+    <div class="container-fluid">
+        <a class="text-white" th:href="@{/member/ownermember/insertOwnerMember}">사업자회원가입</a>
+        <a class="text-white" th:href="@{/mypetboard/accommodation/getAccommodationList}">숙소목록</a>
+        <a class="text-white" th:href="@{/mypetboard/beauty/getBeautyList}">애견미용실목록</a>
+        <a class="text-white" th:href="@{/mypetboard/hospital/getHospitalList}">병원목록</a>
+        <a class="text-white" th:href="@{/mypetboard/foodCafe/getFoodCafeList}">음식점카페목록</a>
+        <form class="d-flex">
+            <input class = "form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button  class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<form th:object="${foodcafe}" th:action="@{/mypetboard/foodCafe/insertFoodCafe}" method="post"  enctype="multipart/form-data">
+    <table class="table table-striped" border="1" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="70">가게명</td><td align="left">
+            <input type = "text" class="input-group-text" name="storeName"/></td>
+        </tr>
+        <tr>
+            <td th:text="카테고리선택" width=80></td>
+            <th align="left"><!--<input name="category" type="text" th:value="${category}">-->
+                <select name="detailCategory" title="2">
+                    <option value="음식점">음식점</option>
+                    <option value="카페">카페</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <td th:for="postcode" width="70">우편번호</td><td align="left">
+            <input type = "text" class="input-group-text" name="Postcode" th:field="*{postcode}"  id="postcode" placeholder="우편번호"/>
+        </td>
+        </tr>
+        <tr>
+            <td width="70">주소</td><td align="left">
+            <input type = "text" class="input-group-text" name="Address" th:field="*{address}"  id="Address" placeholder="주소"/>
+        </td>
+        </tr>
+        <tr>
+            <td width="70">상세주소</td><td align="left">
+            <input type = "text" class="input-group-text" name="DetailAddress" th:field="*{detailAddress}"id="detailAddress" placeholder="상세주소"/>
+        </tr>
+        <tr>
+            <td width="70">주소검색</td><td align="left">
+            <input type="button" onclick="Postcode()" value="주소검색"><br>
+        </tr>
+        <tr>
+            <td width="70">가게연락처</td><td align="left">
+            <input type = "text" class="input-group-text" name="storeTelephone"/></td>
+        </tr>
+        <tr>
+            <td th:text="펫사이즈선택" width=80></td>
+            <th align="left"><!--<input name="category" type="text" th:value="${category}">-->
+                <select name="PetSize" title="2">
+                    <option value="소형">소형</option>
+                    <option value="중형">중형</option>
+                    <option value="대형">대형</option>
+                    <option value="전체">전체</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <td width="70">가게상세정보</td><td align="left">
+            <input type = "text" class="input-group-text" name="Info"/></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center">
+                <input type = "submit" value = "등록"/></td>
+        </tr>
+    </table>
+    <input type="file" name="foodcafeimage" multiple = "multiple">
+</form>
+<!--주소 api -->
+<script src="/js/Addressapi.js"></script>
+</body>
+</html>

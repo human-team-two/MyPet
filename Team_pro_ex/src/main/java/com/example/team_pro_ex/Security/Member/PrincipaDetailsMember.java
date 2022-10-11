@@ -1,6 +1,6 @@
 package com.example.team_pro_ex.Security.Member;
 
-import com.example.team_pro_ex.com.Entity.member.Member;
+import com.example.team_pro_ex.Entity.member.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

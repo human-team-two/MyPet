@@ -1,7 +1,7 @@
 package com.example.team_pro_ex.Security.Member;
 
-import com.example.team_pro_ex.com.Entity.member.Member;
-import com.example.team_pro_ex.com.persistence.member.MemberRepository;
+import com.example.team_pro_ex.Entity.member.Member;
+import com.example.team_pro_ex.persistence.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

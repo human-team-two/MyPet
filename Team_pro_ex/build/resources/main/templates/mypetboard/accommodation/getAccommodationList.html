@@ -5,12 +5,13 @@
     <title>Title</title>
     <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+<!--    <link rel="stylesheet" type="text/css" href="/css/main.css"/>-->
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/boardinsertform.css"/>
+<!--    <link rel="stylesheet" type="text/css" href="/css/boardinsertform.css"/>-->
 </head>
 <body>
+<header th:replace="common/header :: header"></header>
 <nav class="navbar navbar-light bg-dark">
     <div class="container-fluid">
         <a class="text-white" th:href="@{/member/ownermember/insertOwnerMember}">사업자회원가입</a>
@@ -120,5 +121,6 @@
 
 
 </div>
+<footer th:replace="common/footer :: footer"></footer>
 </body>
 </html>

@@ -1,0 +1,29 @@
+$header-backcolor: #f7323f;
+$border-color: 1px solid #0000000A;
+$big-fontsize: 28px;
+$middle-fontsize: 14px;
+$default-fontsize: 12px;
+$small-fontsize: 10px;
+
+$big-screen: 1080px;
+$middle-screen: 480px;
+$default-screen: 720px;
+$small-screen: 360px;
+
+@mixin mobile{
+  @media (max-width:$small-screen) {
+  @content;
+}
+}
+
+@mixin tablet{
+  @media (max-width: $middle-screen) {
+  @content;
+}
+}
+
+@mixin desktop{
+  @media (max-width: $big-screen) {
+  @content;
+}
+}

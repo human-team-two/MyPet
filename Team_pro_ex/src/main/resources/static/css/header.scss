@@ -1,23 +1,24 @@
-$header-backcolor:#f7323f;
-@media (max-width: 375px) {
-  #header {
-    width: 100px;
-    border: 2px solid blue;
+@import 'util.scss';
 
-    > div {
-      width: 10px;
-      border: 2px solid blue;
-    }
+/*#header {
+  width: 100px;
+  border: 2px solid blue;
+
+  > div {
+    width: 10px;
+    border: 2px solid blue;
   }
-}
+}*/
+
 
 #header {
-  display: grid;
+  //display: grid;
+  display: block;
   width: 100%;
   height: 4em;
   margin: auto;
   padding: 0 2em;
-  grid-template-columns: 2fr 3fr 2fr;
+  //grid-template-columns: 2fr 3fr 2fr;
   position: fixed;
   background-color: $header-backcolor;
 
@@ -26,13 +27,14 @@ $header-backcolor:#f7323f;
 
   > {
     a.header-logo {
-      display: flex;
+      display: block;
+      width: 500px;
       font-size: 2em;
       font-weight: bold;
       font-style: oblique;
       color: #ffffff;
-      justify-content: center;
-      align-items: center;
+      //justify-content: center;
+      //align-items: center;
     }
 
     form {
@@ -44,8 +46,9 @@ $header-backcolor:#f7323f;
 }
 
 input.header-input-text {
-  display: block;
-  width: 30em;
+  //display: block;
+  display: flex;
+  //width: 30em;
   height: 3em;
   float: left;
   margin: auto auto;
@@ -53,11 +56,12 @@ input.header-input-text {
 
 #header {
   form input.header-input-img {
-    display: block;
-    width: 10em;
+    display: flex;
+    //display: block;
+    //width: 10em;
     height: inherit;
     border: none;
-    background: url('//image.goodchoice.kr/images/web_v3/ico_srch_2.png') 50% 50% no-repeat;
+    background: url('../img/search_FILL0_wght400_GRAD0_opsz48.png') 50% 50% no-repeat;
     background-size: 24px auto;
     margin: auto;
   }
@@ -78,8 +82,9 @@ input.header-input-text {
 
       > a {
         display: flex;
-        justify-content: space-around;
-        align-items: center;
+        //display: flex;
+        //justify-content: space-around;
+        //align-items: center;
         color: rgb(255, 255, 255, 0.8);
       }
     }

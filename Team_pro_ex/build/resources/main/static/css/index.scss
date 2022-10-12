@@ -1,18 +1,3 @@
-/*media quary
-(min-width:1024px)
-(min-widith:768px)
-(min-width:760px)
-(min-width:480px)
-(max-width:320px)
-
-font
-14px
-18px
-13px
-
-font-weight
-400
-700*/
 
 body > article > div {
   &:nth-of-type(1) {
@@ -23,12 +8,9 @@ body > article > div {
     //background: url('//image.goodchoice.kr/images/web_v3/mainspot_220531.png') 50% 100% no-repeat;
     background: url('../img/mainAd02.png') 50% 100% no-repeat;
     background-size: 924px auto;
-
-    /*background-color: brown;*/
   }
 
   &:nth-of-type(2) {
-    /*background-color: brown;*/
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -188,18 +170,12 @@ body > article > div {
 
     > {
       p {
-        /*    width: 926px;
-            height:150px;*/
         width: inherit;
         height: 50%;
         font-size: 28px;
         color: rgba(0, 0, 0, 0.87);
         line-height: 6em;
         margin: 1%;
-
-        /*margin-top: 10%;*/
-        /*position:relative;*/
-        /*top: 40%;*/
 
         > b {
           margin: 0;
@@ -210,12 +186,8 @@ body > article > div {
       }
 
       a {
-        /*margin: auto;*/
         width: 168px;
         height: 52.8px;
-
-        /*display:block;
-        float: left;*/
 
         > img {
           width: inherit;

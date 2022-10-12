@@ -13,6 +13,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query(value = "select r from Review r where r.writer like %?1% or r.title like %?1% or r.content like %?1%")
     List<Review> findByTitleLikeAndWriterLikeAndContentLike(String keyword);
 
+    @Query(value = "select r from Review r where r.writer like %?1% or r.title like %?1% or r.content like %?1%")
+    Page<Review> findByTitleLikeAndWriterLikeAndContentLike(Pageable pageable, String keyword);
+
     //0929
     Page<Review> findByTitleContaining(Pageable pageable, String keyword);
 

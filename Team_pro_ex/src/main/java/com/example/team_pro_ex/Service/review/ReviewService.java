@@ -22,7 +22,7 @@ public interface ReviewService {
 
     List<Review> searchReviewAll(String keyword);
 
-    Page<Review> findAll(Pageable pageable);
+    Page<Review> findAll(Pageable pageable, String keyword);
 
     Page<Review> findByTitle(Pageable pageable, String keyword);
     Page<Review> findByContent(Pageable pageable, String keyword);

@@ -53,7 +53,7 @@ public class ReviewController {
             } else if (scategory.equals("writer")) {
                 reviews = reviewService.findByWriter(pageable, keyword);
             }else{
-                reviews = reviewService.findAll(pageable);
+                reviews = reviewService.findAll(pageable, keyword);
             }
         model.addAttribute("reviewList", reviews);
         model.addAttribute("scategory", scategory);

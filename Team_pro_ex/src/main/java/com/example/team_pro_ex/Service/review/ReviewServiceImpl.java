@@ -60,9 +60,8 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepo.findByTitleLikeAndWriterLikeAndContentLike(keyword);
     }
     @Override
-    public Page<Review> findAll(Pageable pageable){
-        System.out.println("-----service findAll-----");
-        return reviewRepo.findAll(pageable);
+    public Page<Review> findAll(Pageable pageable, String keyword){
+        return reviewRepo.findByTitleLikeAndWriterLikeAndContentLike(pageable, keyword);
     }
     @Override
     public Page<Review> findByTitle(Pageable pageable, String keyword) {

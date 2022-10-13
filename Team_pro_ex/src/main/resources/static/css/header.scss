@@ -29,7 +29,7 @@
     align-items: center;
     @include test;
 
-    li {
+    >li {
       display: flex;
       width: 100%;
       flex-direction: column;
@@ -43,8 +43,6 @@
         justify-content: center;
         align-items: center;
         color: $font-color-gray;
-
-
       }
     }
   }
@@ -57,6 +55,7 @@ li.header-dropmenu {
 
 
   span.header-dropmenu-02 {
+    width:100%;
     @include test;
 
 

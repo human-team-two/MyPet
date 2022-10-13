@@ -1,92 +1,68 @@
 @import 'util.scss';
 
-/*#header {
-  width: 100px;
-  border: 2px solid blue;
-
-  > div {
-    width: 10px;
-    border: 2px solid blue;
-  }
-}*/
-
-
 #header {
-  //display: grid;
-  display: block;
+  display: grid;
   width: 100%;
   height: 4em;
   margin: auto;
   padding: 0 2em;
-  //grid-template-columns: 2fr 3fr 2fr;
-  position: fixed;
+  grid-template-columns: 150px 1fr;
   background-color: $header-backcolor;
+  position: fixed;
+  z-index: 10;
 
-  /*max-width: 962px;*/
-  min-width: 375px;
-
-  > {
-    a.header-logo {
-      display: block;
-      width: 500px;
-      font-size: 2em;
-      font-weight: bold;
-      font-style: oblique;
-      color: #ffffff;
-      //justify-content: center;
-      //align-items: center;
-    }
-
-    form {
-      display: flex;
-      height: inherit;
-      margin: auto;
-    }
-  }
-}
-
-input.header-input-text {
-  //display: block;
-  display: flex;
-  //width: 30em;
-  height: 3em;
-  float: left;
-  margin: auto auto;
-}
-
-#header {
-  form input.header-input-img {
-    display: flex;
-    //display: block;
-    //width: 10em;
-    height: inherit;
-    border: none;
-    background: url('../img/search_FILL0_wght400_GRAD0_opsz48.png') 50% 50% no-repeat;
-    background-size: 24px auto;
-    margin: auto;
+  > a.header-logo {
+    display: block;
+    width: inherit;
+    font-size: $big-fontsize;
+    font-weight: bold;
+    font-style: oblique;
+    color: $font-color-white;
   }
 
-  > ul {
+  ul {
     display: flex;
+    width:100%;
+    height:100%;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: inherit;
-    height: inherit;
+    @include test;
 
-    > li {
+    li {
       display: flex;
       width: 100%;
-      justify-content: space-around;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      color: rgb(255, 255, 255, 0.8);
+      color: $font-color-gray;
 
-      > a {
+      a {
         display: flex;
-        //display: flex;
-        //justify-content: space-around;
-        //align-items: center;
-        color: rgb(255, 255, 255, 0.8);
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        color: $font-color-gray;
+
+
       }
     }
   }
+}
+
+li.header-dropmenu {
+  display: flex;
+  flex-direction: column;
+  @include test;
+
+
+  span.header-dropmenu-02 {
+    @include test;
+
+
+    a.header-dropmenu-03 {
+      @include test;
+    }
+  }
+
 }

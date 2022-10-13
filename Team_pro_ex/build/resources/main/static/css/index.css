@@ -8,17 +8,16 @@ body > article > div:nth-of-type(1) {
 }
 body > article > div:nth-of-type(2) {
   display: flex;
+  width: inherit;
   justify-content: space-around;
   align-items: center;
   flex-flow: wrap;
-  /*width: 1000px;*/
-  min-width: 375px;
-  max-width: 1000px;
+  min-width: 685px;
   height: 150px;
   margin: 0 auto;
 }
 body > article > div:nth-of-type(2) > a {
-  width: 123px;
+  width: 130px;
   height: 107px;
 }
 body > article > div:nth-of-type(2) > a > span {
@@ -28,20 +27,20 @@ body > article > div:nth-of-type(2) > a > span {
   margin: auto auto;
 }
 body > article > div:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(1) {
-  background: url("//image.goodchoice.kr/images/web_v3/ico_category_180801.png") -144px -72px no-repeat;
-  background-size: 216px auto;
+  background: url("../img/hotel-2022.png") no-repeat;
+  background-size: 72px 72px;
 }
 body > article > div:nth-of-type(2) > a:nth-of-type(2) > span:nth-of-type(1) {
-  background: url("//image.goodchoice.kr/images/web_v3/ico_category_180801.png") -144px 0 no-repeat;
-  background-size: 216px auto;
+  background: url("../img/restaurant-2022.png") no-repeat;
+  background-size: 72px 72px;
 }
 body > article > div:nth-of-type(2) > a:nth-of-type(3) > span:nth-of-type(1) {
-  background: url("//image.goodchoice.kr/images/web_v3/ico_category_180801.png") -72px -144px no-repeat;
-  background-size: 216px auto;
+  background: url("../img/local_hospital-2022.png") no-repeat;
+  background-size: 72px 72px;
 }
 body > article > div:nth-of-type(2) > a:nth-of-type(4) > span:nth-of-type(1) {
-  background: url("//image.goodchoice.kr/images/web_v3/ico_category_180801.png") 0 -72px no-repeat;
-  background-size: 216px auto;
+  background: url("../img/cut-2022.png") no-repeat;
+  background-size: 72px 72px;
 }
 body > article > div:nth-of-type(2) > a:nth-of-type(5) > span:nth-of-type(1) {
   background: url("//image.goodchoice.kr/images/web_v3/ico_category_180801.png") 0 0 no-repeat;
@@ -61,7 +60,7 @@ body > article > div:nth-of-type(2) > a:nth-of-type(8) > span:nth-of-type(1) {
 }
 body > article > div:nth-of-type(2) > a > p {
   text-align: center;
-  width: 123px;
+  width: 140px;
   height: 32px;
 }
 body > article > div:nth-of-type(3) {
@@ -78,7 +77,7 @@ body > article > div:nth-of-type(3) > h2 {
   max-width: 926px;
   font-size: 24px;
   height: 50px;
-  margin: 0 6em;
+  margin: 0 2em;
   font-optical-sizing: auto;
 }
 body > article > div:nth-of-type(3) > ul {

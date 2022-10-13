@@ -1,67 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-<!--    <link rel="stylesheet" type="text/css" href="/css/main.css"/>-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Accommodation List</title>
+    <!-- Favicon-->
+    <link href="/css/boardList.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="/htmlimage/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
-<!--    <link rel="stylesheet" type="text/css" href="/css/boardinsertform.css"/>-->
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <!-- Bootstrap icons-->
+    <!-- Core theme CSS (includes Bootstrap)-->
 </head>
 <body>
-<header th:replace="common/header :: header"></header>
-<nav class="navbar navbar-light bg-dark">
-    <div class="container-fluid">
-        <a class="text-white" th:href="@{/member/ownermember/insertOwnerMember}">사업자회원가입</a>
-        <a class="text-white" th:href="@{/mypetboard/accommodation/getAccommodationList}">숙소목록</a>
-        <a class="text-white" th:href="@{/mypetboard/beauty/getBeautyList}">애견미용실목록</a>
-        <a class="text-white" th:href="@{/mypetboard/hospital/getHospitalList}">병원목록</a>
-        <a class="text-white" th:href="@{/mypetboard/foodCafe/getFoodCafeList}">음식점카페목록</a>
-        <form class="d-flex">
-            <input class = "form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button  class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+
+<!-- Header-->
+<!--<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">숙소 리스트</h1>
+            <p class="lead fw-normal text-white-50 mb-0">등록된 숙소를 소개합니다</p>
+        </div>
     </div>
-</nav>
-<table class="table table-striped" border="1" cellpadding="0" cellspacing="0" width="700" >
-    <tr>
-        <th width="200">카테고리</th>
-        <th width="200">가게번호</th>
-        <th width="200">가게이름</th>
-        <th width="200">상세정보</th>
-        <th width="200">룸등록</th>
-        <th width="200">글삭제</th>
+</header>-->
+<header th:replace="common/header :: header"></header>
+<!-- Section-->
+<article>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5" th:each="accommodation : ${accommodationList}">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" th:src="@{|/images/${accommodation.imgname}|}" alt="경로확인"/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder"  th:text="${accommodation.storeName}"></h5>
+                            <a th:href="@{getAccommodation(seq = ${accommodation.seq})}" th:text="${accommodation.storeName}"></a>
+                            <!-- Product price-->
+                            <div th:text="${accommodation.detailCategory}"></div>
+                            <div th:text="${accommodation.info}"></div>
+                        </div>
+                    </div>
+                    <td><a class="btn btn-secondary border-secondary float-right"
+                           th:href="@{|/mypetboard/accommodation/insertRoom/${accommodation.seq}|}"> 룸등록 </a> </td>
+                    <td> <button th:onclick="btnDel([[${accommodation.seq}]]);">글삭제</button></td>
 
-    </tr>
-    <tr th:each=" accommodation : ${accommodationList}">
-        <td th:name="detailCategory" th:text = "${accommodation.detailCategory}"></td>
-        <td th:name="seq" th:text = "${accommodation.seq}"></td>
-        <td><a th:href="@{getAccommodation(seq = ${accommodation.seq})}"
-               th:text="${accommodation.storeName}"></a> </td>
-        <td th:text="${accommodation.info}"></td>
-        <td><a class="btn btn-secondary border-secondary float-right"
-                th:href="@{|/mypetboard/accommodation/insertRoom/${accommodation.seq}|}"> 룸등록 </a> </td>
-        <td> <button th:onclick="btnDel([[${accommodation.seq}]]);">글삭제</button></td>
-
-        </td>
-    </tr>
-
-   <form th:action="@{/mypetboard/accommodation/getAccommodationList}" method="GET">
-       <table class="table table-striped ">
-           <th th:align="right">
-               <select type="text" name="detailCategory" th:value="${detailCategory}">
-                   <option value="" selected disabled hidden>==카테고리 선택==</option>
-                   <option th:value="모텔">모텔</option>
-                   <option th:value="호텔">호텔</option>
-                   <option th:value="펜션">펜션</option>
-                   <option th:value="전체">전체</option>
-               </select>
-               <input type="text" id="searchKeyword" name="searchKeyword" th:value="${searchKeyword}" placeholder="검색어 입력" autocomplete="off">
-           <button class="btn btn-secondary" type="submit">Search</button>
-       </table>
-   </form>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<a class="btn btn-secondary border-secondary" th:href="@{/mypetboard/accommodation/insertAccommodation}">숙소등록</a>
+<form th:action="@{/mypetboard/accommodation/getAccommodationList}" method="GET">
+    <table class="table table-striped ">
+        <th th:align="right">
+            <select type="text" name="detailCategory" th:value="${detailCategory}">
+                <option value="" selected disabled hidden>==카테고리 선택==</option>
+                <option th:value="모텔">모텔</option>
+                <option th:value="호텔">호텔</option>
+                <option th:value="펜션">펜션</option>
+                <option th:value="전체">전체</option>
+            </select>
+            <input type="text" id="searchKeyword" name="searchKeyword" th:value="${searchKeyword}" placeholder="검색어 입력" autocomplete="off">
+            <button class="btn btn-secondary" type="submit">Search</button>
+    </table>
+</form>
 </table>
 
 <div th:if ="${!accommodationList.isEmpty()}" class="pagination justify-content-center" >
@@ -70,14 +85,17 @@
             <a class="btn btn-secondary btn-secondary" th:href="@{|?page=${previous}|}">이전</a>
         </li>
         <li class="btn btn-secondary border-secondary" th:classappend="${accommodationList.hasNext()} ? 'disabled'" >
-        <a class="btn btn-secondary btn-secondary" th:href="@{|?page=${next}|}">다음</a>
+            <a class="btn btn-secondary btn-secondary" th:href="@{|?page=${next}|}">다음</a>
         </li>
     </ul>
 </div>
-<div class="justify-content-end">
-<a class="btn btn-secondary border-secondary" th:href="@{/mypetboard/accommodation/insertAccommodation}">숙소등록</a>
-</div>
-
+</article>
+<!-- Footer-->
+<footer th:replace="common/footer :: footer"></footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
 <script>
     // 삭제 클릭 시 --> 컨펌 후 --> 할 일 처리
     function btnDel( seq ) {
@@ -91,36 +109,5 @@
         }
     }
 </script>
-
-<!--<div id = "content" class="sub_wrap">-->
-<!--     <div id = "product_list_area">-->
-<!--         <form th:action="@{/mypetboard/accommodation/getAccommodationList}" method="GET">-->
-<!--             <table class="table table-striped ">-->
-<!--                 <th th:align="right">-->
-<!--                     <select type="text" name="detailCategory" th:value="${detailCategory}">-->
-<!--                         <option value="" selected disabled hidden>==카테고리 선택==</option>-->
-<!--                         <option th:value="모텔">모텔</option>-->
-<!--                         <option th:value="호텔">호텔</option>-->
-<!--                         <option th:value="펜션">펜션</option>-->
-<!--                         <option th:value="전체">전체</option>-->
-<!--                     </select>-->
-<!--                     <input type="text" id="searchKeyword" name="searchKeyword" th:value="${searchKeyword}" placeholder="검색어 입력" autocomplete="off">-->
-<!--                     <button class="btn btn-secondary" type="submit">Search</button>-->
-<!--             </table>-->
-<!--         </form>-->
-<!--         <li class="list_1" th:each=" accommodation : ${accommodationList}">-->
-<!--             <a th:href="@{getAccommodation(seq = ${accommodation.seq})}"-->
-<!--                th:text="${accommodation.storeName}"-->
-<!--                th:text="${accommodation.info}"></a>-->
-<!--             <a class="btn btn-secondary border-secondary float-right"-->
-<!--                th:href="@{|/mypetboard/accommodation/insertRoom/${accommodation.seq}|}"> 룸등록-->
-<!--             </a>-->
-<!--         </li>-->
-
-<!--     </div>-->
-
-
-</div>
-<footer th:replace="common/footer :: footer"></footer>
 </body>
 </html>

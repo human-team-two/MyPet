@@ -1,3 +1,5 @@
+@import "util.scss";
+
 /*전체 박스 규격 세팅해주기*/
 
 * {
@@ -19,7 +21,7 @@ html, body {
   width: 100%;
   min-height: 100%;
   color: rgb(0, 0, 0, 0.56);
-  font-size: 18px;
+  font-size: $default-fontsize;
   text-decoration: none;
 }
 

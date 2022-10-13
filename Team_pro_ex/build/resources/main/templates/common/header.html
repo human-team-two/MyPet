@@ -4,20 +4,24 @@
 <th:block th:fragment="style">
     <link rel="stylesheet" href="/css/header.css">
 </th:block>
-    <div th:fragment="header" id="header">
-        <a class="header-logo" th:href="@{/}">My Pet</a>
-        <form method="get" action="#">
-            <input class="header-input-text" type="text" name="">
-            <input class="header-input-img" type="submit" value="">
-            <!--        <input type="search"/>-->
-        </form>
-        <ul>
-            <li>
-                <a href="/">내주변</a>
-                <a href="/">예약내역</a>
-                <a th:href="@{/mypetboard/review/noticeList}">공지사항
-                <a href="/Member/Login">로그인</a>
-            </li>
-        </ul>
+<div th:fragment="header" id="header">
+    <a class="header-logo" th:href="@{/}">My Pet</a>
+    <!--        <input class="header-input-text" type="text" name="">-->
+    <!--        <input class="header-input-img" type="submit" value="">-->
+    <!--        <input type="search"/>-->
+    <ul>
+        <li><a th:href="@{/mypetboard/review/noticeList}">공지사항</a>        </li>
+        <li><a href="/">문의사항</a></li>
+        <li class="header-dropmenu">
+            <a href="/">더보기</a>
+            <span class="header-dropmenu-02">
+                    <a class="header-dropmenu-03">애견숙소</a>
+                    <a class="header-dropmenu-03">애견음식점·카페</a>
+                    <a class="header-dropmenu-03">애견병원</a>
+                    <a class="header-dropmenu-03">애견미용</a>
+             </span>
+        </li>
+        <li><a href="/Member/Login">로그인</a></li>
+    </ul>
 </div>
 </html>

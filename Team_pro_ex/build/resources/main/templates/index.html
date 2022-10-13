@@ -7,7 +7,17 @@
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/index.css"/>
-<!--    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"/>
+    <script>
+        $(document).ready(function(){
+            $(".header-dropmenu-02").hide();
+                $(".header-dropmenu").on("mouseenter",function(){
+                    $(".header-dropmenu-02").slideUp(300);
+                    $(this).next().stop().slideDown(300);
+                });
+            })
+    </script>
+    <!--    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />-->
 <body>
 <header th:replace="common/header :: header"></header>
 <article>
@@ -23,21 +33,21 @@
             <p>애견병원</p></a>
         <a  th:href="@{/mypetboard/beauty/getBeautyList}"><span></span>
             <p>애견미용</p></a>
-        <a th:href="@{/member/ownermember/insertOwnerMember}"><span></span>
+        <!--<a th:href="@{/member/ownermember/insertOwnerMember}"><span></span>
             <p>사업자회원가입</p></a>
         <a th:href="@{/}"><span></span>
             <p>무제</p></a>
         <a th:href="@{/}"><span></span>
             <p>무제2</p></a>
         <a th:href="@{/mypetboard/review/reviewList(page=0, size=5)}"><span></span>
-            <p>문의사항</p></a>
+            <p>문의사항</p></a>-->
     </div>
     <div>
         <h2>마이펫 공지사항</h2>
         <ul>
             <li><a href="#"><img src="//image.goodchoice.kr/images/web_v3/b2b_banner.png" alt="여기어때 비즈니스">
                 <strong>마이펫 비즈니스</strong>
-                출장부터 복지까지
+                출장부터 케어까지
                 <br>
                 마이펫 비즈니스로 스마트하게</a></li>
             <li><a href="#"><img src="//image.goodchoice.kr/images/web_v3/re_jalnan.png" alt="여기어때 잘난체">

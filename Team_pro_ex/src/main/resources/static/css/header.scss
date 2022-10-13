@@ -14,20 +14,20 @@
   > a.header-logo {
     display: block;
     width: inherit;
+    line-height: 2em;
     font-size: $big-fontsize;
     font-weight: bold;
     font-style: oblique;
     color: $font-color-white;
   }
 
-  ul {
+  >ul {
     display: flex;
     width:100%;
-    height:100%;
+    height:4em;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    @include test;
 
     >li {
       display: flex;
@@ -37,7 +37,7 @@
       align-items: center;
       color: $font-color-gray;
 
-      a {
+      >a {
         display: flex;
         width: 100%;
         justify-content: center;
@@ -51,16 +51,30 @@
 li.header-dropmenu {
   display: flex;
   flex-direction: column;
-  @include test;
 
 
-  span.header-dropmenu-02 {
-    width:100%;
-    @include test;
+  ul.header-dropmenu-02 {
+    @extend .header-dropmenu;
+    background-color: $header-backcolor;
+    width:12em;
+    display:none;
+    position: absolute;
+    top: 3em;
 
+    li.header-dropmenu-03 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding:1em 0;
+      height:100%;
 
-    a.header-dropmenu-03 {
-      @include test;
+      a.header-dropmenu-04{
+        color:$font-color-gray;
+      }
+    }
+    li.header-dropmenu-03:hover {
+      background-color: rgba(255, 166, 0, 0.93);
     }
   }
 

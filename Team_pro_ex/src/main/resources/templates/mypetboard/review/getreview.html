@@ -5,6 +5,11 @@
     <meta http-equiv="Content-Type" content = "text/html; charset = UTF-8">
     <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
     <title>문의사항 상세 page</title>
 
     <script>
@@ -21,6 +26,8 @@
 </head>
 
 <body th:align="center">
+<header th:replace="common/header :: header"></header>
+<article>
 <br>
 <h2>문의사항 상세 page</h2>
 
@@ -83,8 +90,7 @@
 <!--<button type="submit" th:href="@{/removeReview(seq=${reviewList.seq})}">글삭제</button>-->
 <!--<a th:href="@{removeReview(seq=${reviewList.seq})}"><button class="btn btn-outline-success">글 삭제</button></a>-->
 <a th:href="@{/mypetboard/review/reviewList}"><button class="btn btn-outline-success">문의사항 List로 이동</button></a>
-
-
-
+</article>
+<footer th:replace="common/footer :: footer"></footer>
 </body>
 </html>

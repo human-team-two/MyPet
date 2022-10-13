@@ -12,21 +12,21 @@
 #header > a.header-logo {
   display: block;
   width: inherit;
+  line-height: 2em;
   font-size: 36px;
   font-weight: bold;
   font-style: oblique;
   color: #ffffff;
 }
-#header ul {
+#header > ul {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 4em;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border: 1px solid black;
 }
-#header ul > li {
+#header > ul > li {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -34,7 +34,7 @@
   align-items: center;
   color: rgba(255, 255, 255, 0.8);
 }
-#header ul > li a {
+#header > ul > li > a {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -45,14 +45,27 @@
 li.header-dropmenu {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
 }
-li.header-dropmenu span.header-dropmenu-02 {
-  width: 100%;
-  border: 1px solid black;
+li.header-dropmenu ul.header-dropmenu-02 {
+  background-color: #6667AB;
+  width: 12em;
+  display: none;
+  position: absolute;
+  top: 3em;
 }
-li.header-dropmenu span.header-dropmenu-02 a.header-dropmenu-03 {
-  border: 1px solid black;
+li.header-dropmenu ul.header-dropmenu-02 li.header-dropmenu-03 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 0;
+  height: 100%;
+}
+li.header-dropmenu ul.header-dropmenu-02 li.header-dropmenu-03 a.header-dropmenu-04 {
+  color: rgba(255, 255, 255, 0.8);
+}
+li.header-dropmenu ul.header-dropmenu-02 li.header-dropmenu-03:hover {
+  background-color: rgba(255, 166, 0, 0.93);
 }
 
 /*# sourceMappingURL=header.css.map */

@@ -7,7 +7,11 @@
     <meta http-equiv = "Content-Type" content = "text/html; charset = UTF-8">
     <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
     <script>
 
         $(document).ready(function(){
@@ -71,7 +75,8 @@
 </head>
 
 <body th:align="center">
-
+<header th:replace="common/header :: header"></header>
+<article>
 <h3 th:align="center" style="color:lightseagreen">문의사항 List</h3>
 <hr>
 <a th:href="@{/mypetboard/review/insertreview}">
@@ -158,6 +163,8 @@
         </th:block>
     </li>
 </ul>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
 
 <!--<script>-->
 <!--    // 삭제 클릭 시 &ndash;&gt; 컨펌 후 &ndash;&gt; 할 일 처리-->

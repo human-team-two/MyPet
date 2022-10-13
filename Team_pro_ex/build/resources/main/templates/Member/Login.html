@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <block th:replace="common/dropmenu :: menu"></block>
 
     <style>
         .error{
@@ -21,7 +22,7 @@
 <article>
     <div id="wrapper">
         <div class="login-div-logo">
-            <a class="logo" href="#">확인</a>
+            <a class="logo" href="#">My Pet</a>
         </div>
         <form th:action="@{/logins}" method="post">
             <div id="container">

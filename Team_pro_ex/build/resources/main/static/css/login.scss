@@ -1,4 +1,4 @@
-$header-backcolor:#f7323f;
+@import 'util.scss';
 
 #wrapper {
   display: flex;
@@ -15,12 +15,15 @@ $header-backcolor:#f7323f;
 
 .logo {
   display: flex;
-  width: 122px;
-  height: 44px;
-  background: url("/img/h1_mobile.png") 50% 50% no-repeat;
-  background-size: 122px 34px;
-  text-indent: -9999px;
+  width: 144px;
+  height: 82px;
+  background: url(../img/sound_detection_dog_barking-2022.png) 50% 0% no-repeat;
+  text-indent: 2em;
+  line-height: 7em;
   margin-top: 5em;
+  font-size: 18px;
+  font-weight: 700;
+  color:$header-backcolor;
 }
 
 div.login-containter {

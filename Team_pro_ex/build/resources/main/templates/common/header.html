@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org/">
 
-<th:block th:fragment="style">
-    <link rel="stylesheet" href="/css/header.css">
-</th:block>
 <div th:fragment="header" id="header">
     <a class="header-logo" th:href="@{/}">My Pet</a>
     <!--        <input class="header-input-text" type="text" name="">-->
     <!--        <input class="header-input-img" type="submit" value="">-->
     <!--        <input type="search"/>-->
     <ul>
-        <li><a th:href="@{/mypetboard/review/noticeList}">공지사항</a>        </li>
-        <li><a href="/">문의사항</a></li>
+        <li><a th:href="@{/mypetboard/review/noticeList}">공지사항</a></li>
+        <li><a th:href="@{/mypetboard/review/reviewList}">문의사항</a></li>
         <li class="header-dropmenu">
             <a href="/">더보기</a>
-            <span class="header-dropmenu-02">
-                    <a class="header-dropmenu-03">애견숙소</a>
-                    <a class="header-dropmenu-03">애견음식점·카페</a>
-                    <a class="header-dropmenu-03">애견병원</a>
-                    <a class="header-dropmenu-03">애견미용</a>
-             </span>
+            <ul class="header-dropmenu-02">
+                    <li class="header-dropmenu-03"><a class="header-dropmenu-04" th:href="@{/mypetboard/accommodation/getAccommodationList}">애견숙소</a></li>
+                    <li class="header-dropmenu-03"><a class="header-dropmenu-04" th:href="@{/mypetboard/foodCafe/getFoodCafeList}">애견음식점·카페</a></li>
+                    <li class="header-dropmenu-03"><a class="header-dropmenu-04" th:href="@{/mypetboard/hospital/getHospitalList}">애견병원</a></li>
+                    <li class="header-dropmenu-03"><a class="header-dropmenu-04" th:href="@{/mypetboard/beauty/getBeautyList}">애견미용</a></li>
+             </ul>
         </li>
         <li><a href="/Member/Login">로그인</a></li>
     </ul>

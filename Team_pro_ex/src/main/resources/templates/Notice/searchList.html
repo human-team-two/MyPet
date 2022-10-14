@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>검색결과</title>
+    <meta http-equiv = "Content-Type" content = "text/html; charset = UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+</head>
+<body th:align="center">
+<h2>공지사항 검색 목록</h2>
+<table class="table table-striped" th:align="center" border = "1"
+       th:cellpadding = "1" th:cellspacing = "1" th:width="750px">
+    <tr>
+        <th th:width = "50">No</th>
+        <th th:width = "150">제목</th>
+        <th th:width = "200">내용</th>
+        <th th:width = "100">작성자</th>
+        <th th:width = "100">등록일</th>
+        <th th:width = "50">조회수</th>
+    </tr>
+    <tr th:each = "key : ${keyword}">
+        <td th:name="seq" th:text = "${key.seq}"></td>
+        <td th:name="title" th:text = "${key.title}"></a></td>
+        <td th:name="content" th:text="${key.content}"></td>
+        <td th:name="writer" th:text = "${key.writer}"></td>
+            <!-- dates.format = 날짜를 일정형식으로 바꿔주는 포맷팅 -->
+        <td th:name="createDate" th:text = "${#dates.format(key.createDate, 'yyyy-MM-dd HH:mm')}">
+            <!--            <td th:name="cnt" th:text = "${board.cnt}">-->
+        <td th:name="cnt" th:text = "${key.cnt}">
+    </tr>
+</table>
+
+<br>
+<a th:href="@{/Notice/getNoticeList}">공지사항 목록</a>
+</body>
+</html>

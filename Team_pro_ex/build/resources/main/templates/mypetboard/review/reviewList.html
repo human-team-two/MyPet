@@ -22,7 +22,7 @@
            // 삭제 클릭 시 &ndash;&gt; 컨펌 후 &ndash;&gt; 할 일 처리
           function btnDel(seq) {
                // 컨펌 처리-->
-               if(confirm( "레알 삭제 하시겠습니까?") == true ) {
+               if(confirm( "삭제 하시겠습니까?") == true ) {
                    location.href = '/mypetboard/review/removeReview?seq=' +  seq;
               }
              else {
@@ -36,9 +36,6 @@
             display: inline-block;
             border: 0px solid;
             padding: 10px;
-        }
-        ul {
-            margin-left: -50px;
         }
     </style>
 
@@ -81,7 +78,7 @@
 <hr>
 <a th:href="@{/mypetboard/review/insertreview}">
     <button class="btn btn-outline-success">문의사항 등록</button></a>
-<br>
+
 <p>/ 현재 <span th:text="${reviewList.totalElements}" style="font-weight: bold">10</span>명의 회원정보가 등록되었습니다.</p>
 
 <form class="d-flex" th:action="@{/mypetboard/review/reviewList}" method="GET">
@@ -89,22 +86,20 @@
     <input type="hidden" name="size" value="3">
 
     <select th:type="text" name="scategory" th:value="${scategory}" th:width="20">
-        <option value="#" selected disabled hidden>==검색 키워드 선택==</option>
+        <option value="#" selected disabled hidden>=검색 키워드 선택=</option>
         <option value="title">제목</option>
         <option value="content">내용</option>
         <option value="writer">작성자</option>
     </select>
-    <input class = "input-group-text" id="keyword" size="30" type="text" name="keyword" th:value="${keyword}" placeholder="검색어를 입력해주세요" aria-label="검색어를 입력해주세요">
+    <input class = "input-group-text" id="keyword" size="30" type="text" name="keyword" th:value="${keyword}" placeholder="검색할 단어를 입력하세요" aria-label="검색할 단어를 입력하세요">
     <button class="btn btn-outline-success" type="submit" id="s_button">Search</button>
 </form>
 
-<form
-        style="padding: 10px; border: 0px solid; width: 780px; display: flex; justify-content: flex-end"
-        th:action="@{/mypetboard/review/reviewList}" method="GET">
+<form th:action="@{/mypetboard/review/reviewList}" method="GET">
     <input type="hidden" name="page" value="0">
     <input type="hidden" name="size" value="5">
 </form>
-
+<br>
     <table class="table table-striped" th:align="center" border = "1" th:cellpadding = "1" th:cellspacing = "1" th:width="750px">
         <tr>
             <th th:width = "50">No</th>

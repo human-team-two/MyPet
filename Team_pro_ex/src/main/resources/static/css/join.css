@@ -4,15 +4,19 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
-  padding-top: 5rem;
 }
 
 .logo {
   display: flex;
   width: 122px;
-  height: 44px;
-  background: url("../img/sound_detection_dog_barking-2022.png") 50% 50% no-repeat;
-  text-indent: -9999px;
+  height: 103px;
+  background: url(../img/sound_detection_dog_barking-2022.png) 50% 50% no-repeat;
+  line-height: 10em;
+  text-align: center;
+  font-family: "jalnan";
+  font-size: 18px;
+  font-weight: 700;
+  color: #6667AB;
 }
 
 .block {
@@ -42,6 +46,11 @@ select, option {
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 6px;
   margin: 5px 0;
+}
+
+input.join-button-submit {
+  background-color: #6667AB;
+  color: #ffffff;
 }
 
 /*# sourceMappingURL=join.css.map */

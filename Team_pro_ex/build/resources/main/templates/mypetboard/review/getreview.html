@@ -28,35 +28,35 @@
 <body th:align="center">
 <header th:replace="common/header :: header"></header>
 <article>
-<br>
-<h2>문의사항 상세 page</h2>
+    <h3 th:align="center" style="color:#d2691e">문의사항 상세내용</h3>
+    <hr>
 
 <form th:action="@{updateReview}" method="POST">
     <input type="hidden" name="seq" th:value="${reviewList.seq}">
     <table class="table table-striped" th:align="center" border = "1" th:cellpadding = "1" th:cellspacing = "1" th:width="750px">
 
         <tr>
-            <td style="width:10%" bgcolor="#deb887" th:text = "No"></td>
+            <td style="width:10%" th:text = "No"></td>
             <td th:text="${reviewList.seq}"></td>
         </tr>
         <tr>
-            <td bgcolor="#fdf5e6" th:text="분류" th:width="70" th:align="cetner"></td>
+            <td th:text="분류" th:width="70" th:align="cetner"></td>
             <td th:text="${reviewList.category}" th:width="20"></td>
         </tr>
         <tr>
-            <td bgcolor="#fdf5e6" th:text="작성자"></td>
+            <td th:text="작성자"></td>
             <td th:text="${reviewList.writer}"></td>
         </tr>
         <tr>
-            <td bgcolor="#fdf5e6" th:text="제목"></td>
+            <td th:text="제목"></td>
             <td><input class="input-group-text" style="text" name="title" size="20" th:value="${reviewList.title}"></td>
         </tr>
         <tr>
-            <td bgcolor="#fdf5e6" th:text="내용"></td>
+            <td th:text="내용"></td>
             <td><textarea class="input-group-text" name="content" cols="40" rows="10" th:text="${reviewList.content}"></textarea>
         </tr>
         <tr>
-            <td bgcolor="green" th:text="등록일"></td>
+            <td th:text="등록일"></td>
             <td th:text="${#dates.format(reviewList.createDate, 'yyyy-MM-dd HH:ss')}"></td>
         </tr>
         <tr>
@@ -66,7 +66,7 @@
     </table>
 </form>
 
-<form th:action="@{|/mypetboard/review/insertReply/${reviewList.seq}|}" method="post">
+<!--<form th:action="@{|/mypetboard/review/insertReply/${reviewList.seq}|}" method="post">
     <table class="table table-striped" th:align="center" th:border="1" th:cellpadding="0" th:cellspacing="0">
         <tr>
             <td th:width="100" th:align="center">제목</td>
@@ -82,7 +82,7 @@
             </td>
         </tr>
     </table>
-</form>
+</form>-->
 <!--<tr th:each="reply : ${replyList}">-->
 <!--<td th:text="${reply.title}"></td>-->
 <!--<td th:text="${reply.content}"></td></tr>-->

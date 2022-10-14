@@ -13,6 +13,7 @@
 
 .logo {
   display: flex;
+  font-family: jalnan;
   width: 144px;
   height: 82px;
   background: url(../img/sound_detection_dog_barking-2022.png) 50% 0% no-repeat;

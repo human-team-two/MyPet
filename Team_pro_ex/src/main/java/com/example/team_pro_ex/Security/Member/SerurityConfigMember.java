@@ -1,15 +1,20 @@
 package com.example.team_pro_ex.Security.Member;
 
+import com.example.team_pro_ex.com.Entity.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+
+import javax.sql.DataSource;
 
 
 @RequiredArgsConstructor
@@ -34,10 +39,11 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 // .antMatchers("/Member/**") => 와일드카드로 인해 모든 거 허용
                 // .antMatchers("/Member/**").hasRole("Role_MANAGER") => 우리 프로젝트 Manager는 회원, 사업자
                 // 경로의 모든 경로를 Role_MANAGER가 접근할 수 있다.
-
                 //페이지 권한설정 => 매니저의 권한을 넣으려면 Member옆에 access와 같이 입력을 해줘야한다.
                 //시큐리티 권한을 사용하려면 반드시 ROLE_MEMBER와 같이 사용하여야 한다.
-                .regexMatchers("/Member/[^(mJoin/Join)|(Login)].*").
+                // .regexMatchers() => antMatcher() 메소드가 Ant 스타일 와일드카드를 포함한 패스로 동작하는 반면,
+                // 요청 패스에 정규 표현식을 사용할 수 있는 regexMatchers() 메소드도 있다.
+                .regexMatchers("/Member/[^(mJoin/Join)|(Login)|(mUpdate/Update)|(mDelete/upDelete)].*").
                 access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MEMBER') or hasRole('ROLE_MANAGER')")
 //                .regexMatchers("/businessMember/[^(bmJoin/bm_Join)].*").
 //                access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="UTF-8">
+    <title>댓글 수정</title>
+</head>
+<body>
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">댓글 수정</h5>
+    <form th:object="${reply}" method="post">
+        <input name="seq" type="hidden" th:value="${r_seq}">
+        <div class="mb-3">
+            <label for="r_content" class="form-label">내용</label>
+            <textarea class="form-control" rows="10" id="r_content" name="r_content"></textarea>
+        </div>
+        <input type="submit" value="저장하기" class="btn btn-primary my-2">
+    </form>
+</div>
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+<!-- Bootstrap JS -->
+<script src="/bootstrap.min.js"></script>
+</body>
+</html>

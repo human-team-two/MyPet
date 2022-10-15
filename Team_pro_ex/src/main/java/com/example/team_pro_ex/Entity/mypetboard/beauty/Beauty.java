@@ -22,7 +22,7 @@ public class Beauty extends BoardCommon {
     private String imgName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "member_Number_Seq")
+    @JoinColumn(referencedColumnName = "memberNumberSeq")
     private Member member;
 
 }

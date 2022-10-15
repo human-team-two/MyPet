@@ -40,7 +40,7 @@ public class Review extends BaseTime {
 
     // optional = false => 외래키니까 무조건 존재해야한다.
     @ManyToOne(fetch = FetchType.LAZY , optional = false)
-    @JoinColumn(name="member_Number_Seq")
+    @JoinColumn(name="memberNumberSeq")
     private Member member;
 
 //    private String scategory;

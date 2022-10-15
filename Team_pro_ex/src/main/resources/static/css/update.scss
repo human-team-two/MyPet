@@ -1,4 +1,4 @@
-$header-backcolor:#f7323f;
+@import 'util.scss';
 
 article {
   padding: 0;
@@ -6,8 +6,8 @@ article {
 
 .update-info {
   padding-top: 4em;
-  background-color: #f7323f;
-  color: #f0f0f0;
+  background-color: $header-backcolor;
+  color: $font-color-white;
 }
 
 .update-info-h2 {

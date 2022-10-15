@@ -24,7 +24,7 @@
         </div>
         <div class="content">
             <form class="form-1" th:action="@{/Member/mUpdate/Update}" th:object="${member}" method="post">
-                <input name="member_Number_Seq" type="hidden" th:value="*{memberNumberSeq}">
+                <input name="memberNumberSeq" type="hidden" th:value="*{memberNumberSeq}">
                 <input name="role" type="hidden" th:value="*{role}">
                 <div>
                     <strong>아이디</strong>

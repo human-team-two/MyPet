@@ -34,7 +34,7 @@ public class FoodCafe extends BoardCommon implements Serializable {
     private List<Menu> menuList;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "member_Number_Seq")
+    @JoinColumn(referencedColumnName = "memberNumberSeq")
     private Member member;
 
 }

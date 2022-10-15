@@ -28,6 +28,6 @@ public class Hospital extends BoardCommon {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "member_Number_Seq")
+    @JoinColumn(referencedColumnName = "memberNumberSeq")
     private Member member;
 }

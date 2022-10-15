@@ -1,6 +1,10 @@
 package com.example.team_pro_ex.Security.Member;
 
 import com.example.team_pro_ex.Entity.member.Member;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,11 +13,16 @@ import java.util.Collection;
 
 public class PrincipaDetailsMember implements UserDetails {
 
+    @Getter
+    @Setter
     private Member member;
 
-    public PrincipaDetailsMember(Member member){
+    @Autowired
+    PrincipaDetailsMember(Member member){
         this.member = member;
     }
+
+
     //해당 User의 권한을 리턴하는 곳
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

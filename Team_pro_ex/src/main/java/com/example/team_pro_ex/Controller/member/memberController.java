@@ -17,7 +17,7 @@ import java.util.Map;
 @Controller
 // 세션에 상태 정보를 저장할 때 사용하는데, @SessionAttributes 뒤에 ("member") 라고 설정했기 때문에
 // "member" 라는 이름으로 저장된 데이터를 자동으로 세션으로 등록
-@RequestMapping(path = "/Member")
+//@RequestMapping(path = "/Member")
 public class memberController {
 
     private final memberService memberService;
@@ -28,27 +28,27 @@ public class memberController {
     }
 
 
-    @GetMapping("index")
+    @GetMapping("/Member/index")
     public void index(){
 
     }
 
-    @GetMapping("/memberList/members")
+    @GetMapping("/Member/memberList/members")
     public String membrerList(Model model){
         model.addAttribute("member", memberService.getMemberListEncodingByMemberList(
                 memberService.getMemberList()));
         return  "/Member/memberList/members";
     }
     //일반 회원가입
-    @GetMapping("/mJoin/Join")
-    public String insertMember(Member member, Model model){
+    @GetMapping("/Member/mJoin/Join")
+    public String insertMember(Model model){
         System.out.println("get mapping account !!");
         System.out.println("get방식으로 인한 Join페이지 = 우리가 처음 join페이지를 들어갈 떄는 null값이 뜰 수 밖에없다.");
         System.out.println("왜냐!!?!? 값이 없으니까!");
         model.addAttribute(new Member());
         return "Member/mJoin/Join";
     }
-    @PostMapping("/mJoin/Join")
+    @PostMapping("/Member/mJoin/Join")
     public String insertMember(@Valid Member member, Errors errors, Model model){
         System.out.println("---check---");
         System.out.println("---PostMapping 실제로 여기서 값이 들어감---");
@@ -96,7 +96,7 @@ public class memberController {
     }
 
 
-    @GetMapping("/mUpdate/Update") //마이 페이지 수정폼
+    @GetMapping("/Member/mUpdate/Update") //마이 페이지 수정폼
     //@AuthenticationPrincipal PrincipaDetailsMember userDetails => 로그인한 인증 된 정보를 가져온다.
     public String myPage(@AuthenticationPrincipal PrincipaDetailsMember userDetails, Model model){
         System.out.println("get mapping account !!");
@@ -108,12 +108,14 @@ public class memberController {
     }
 
 
-    @PostMapping("/mUpdate/Update") // 실제로 수정 되는 메소드
-    public String updateM(@Valid Member member, Errors errors, Model model){
+    @PostMapping("/Member/mUpdate/Update") // 실제로 수정 되는 메소드
+    public String updateM(@Valid Member member,
+                          @AuthenticationPrincipal PrincipaDetailsMember userDetails,
+                          Errors errors, Model model){
         System.out.println("---회원 정보 수정이 이루어 진다.---");
         System.out.println("---check---");
         System.out.println("---PostMapping 실제로 여기서 값이 들어감---");
-        System.out.println("시퀀스 넘버 : "+ member.getMember_Number_Seq());
+        System.out.println("시퀀스 넘버 : "+ member.getMemberNumberSeq());
         System.out.println("아이디 : "+ member.getId());
         System.out.println("비밀번호 : "+ member.getPassword());
         System.out.println("이름 : "+ member.getName());
@@ -145,13 +147,40 @@ public class memberController {
             return "redirect:/Member/mUpdate/Update"; //로그안 페이지로 왜 안돌아가는지 모르겠다.
         }
         System.out.println("컨트롤라 : "+member.getId());
-        memberService.updateMember(member);
+        //userDetails에 있는 pk를 가져온다 -> 그리고 userDetails에 있는 로그인정보도 수정
+        member.setMemberNumberSeq(userDetails.getMember().getMemberNumberSeq());
+        member.setPassword(userDetails.getMember().getPassword());
+        Member findMember = memberService.updateMember(member);
+        System.out.println("동물 타입 변경 : "+findMember.getPetT());
+        userDetails.setMember(findMember);
 
-        return "redirect:/Member/loginPage";
+        return "redirect:/";
+    }
+
+    @GetMapping("/Member/mUpdate/updatePassword")
+    public void updatePassword(){
+    }
+    // DB에서는 변경이 되지만 내 화면에서는 바뀌지가 않는다.
+    @PostMapping("/Member/mUpdate/updatePassword")
+    public String updatePassword(@Valid Member member,
+                                 @AuthenticationPrincipal PrincipaDetailsMember userDetails,
+                                 Errors errors, Model model){
+        if(errors.hasErrors()){
+            Map<String, String> member_Availability = memberService.member_Availability(errors);
+            for(String key : member_Availability.keySet()){
+                model.addAttribute(key, member_Availability.get(key));
+            }
+            return "redirect:/Member/mUpdate/updatePassword"; //로그안 페이지로 왜 안돌아가는지 모르겠다.
+        }
+            Member findMember = memberService.getMembers(userDetails.getMember());
+            findMember.setPassword(member.getPassword());
+
+            memberService.updateMember(findMember);
+        return "redirect:/";
     }
 
     //로그인
-    @GetMapping("/Login")
+    @GetMapping("/Member/Login")
     public String login(@RequestParam(value = "error", required = false)String error,
                         @RequestParam(value = "exception", required = false)String exception,
                         Model model) {
@@ -160,36 +189,30 @@ public class memberController {
         return "/Member/Login";
     }
 
-    //로그아웃
-    @GetMapping("/logout")
-    public String logout(SessionStatus status){
-        status.setComplete();
-        System.out.println("로그아웃");
-        return "redirect:/Member/Login";
-    }
-
-    @GetMapping("/loginPage")
     public void loginPage(){
     }
 
 
+
+
     //회원을 삭제하는게 아니라 수정한다. ID, Name, Join_m 및 날짜 테이블의 join_O을 제외한 값 전부 Null
     //model.addAttribute(userDetails.getMember());
-    @PostMapping("/mDelete/upDelete")
+    @PostMapping("/Member/mDelete/upDelete")
     public String deleteUpdateMember(@AuthenticationPrincipal PrincipaDetailsMember userDetails){
         System.out.println("-------delete-------");
         memberService.deleteUpdateMember(userDetails.getMember());
-        return "redirect:/Member/loginPage";
+
+        return "redirect:/logout";
     }
 
     //아이디 찾기 = 핸드폰 번호로 찾기(from 화면만 보임)
-    @GetMapping("/selectMember/select")
+    @GetMapping("/Member/selectMember/select")
     public String selectMember() {
         return "/Member/selectMember/select";
     }
 
     //핸드폰으로 아이디찾기 => 결과값을 보여준다.
-    @PostMapping("/selectMember/select")
+    @PostMapping("/Member/selectMember/select")
     public String resultMember(Member member, Model model) {
         System.out.println("------select ID--------");
         System.out.println(memberService.booleanSearchUserById(member));

@@ -1,5 +1,6 @@
 package com.example.team_pro_ex.Controller.review;
 
+import com.example.team_pro_ex.Entity.member.Member;
 import com.example.team_pro_ex.Entity.review.Review;
 import com.example.team_pro_ex.Security.Member.PrincipaDetailsMember;
 import com.example.team_pro_ex.Service.review.ReviewService;
@@ -19,6 +20,8 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+
+
     @Autowired
     protected ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
@@ -31,10 +34,19 @@ public class ReviewController {
     }
 
     @PostMapping("/mypetboard/review/insertreview")
-    public String insertReview(Review review) {
+    public String insertReview(@AuthenticationPrincipal PrincipaDetailsMember userDetails, Review review) {
         System.out.println("-----POST insertreview");
         review.setCreateDate(new Date());
-        reviewService.insertReview(review);
+
+
+
+        //시퀀스 아이디만 넣어줌 => entity에 @toString(계속 엔티티끼리 순환참조를 해서 스택오버플로우)
+        reviewService.insertReview(review.setMember(Member.builder()
+                .memberNumberSeq(userDetails.getMember()
+                        .getMemberNumberSeq()).build()));
+
+        // review.setMember(userDetails.getMember()) => 멤버를 넘겨줌
+       // reviewService.insertReview(review.setMember(userDetails.getMember()));
         System.out.println("-----insertreview= " + review);
         return "redirect:/mypetboard/review/reviewList";
     }
@@ -71,15 +83,26 @@ public class ReviewController {
         return "mypetboard/review/getreview";
     }
     @GetMapping("/mypetboard/review/removeReview")
-    public String removereview(Review review) {
+    public String removereview(@AuthenticationPrincipal PrincipaDetailsMember userDetails, Review review) {
         System.out.println("-----GET removereview");
-        reviewService.removeReview(review);
+        Review findReview = reviewService.findById(review.getSeq());
+        if(userDetails.getMember().getMemberNumberSeq() == findReview.getMember().getMemberNumberSeq()){
+            reviewService.removeReview(review);
+        }else{
+            System.out.println("아이디가 아닙니다.");
+        }
         return "redirect:/mypetboard/review/reviewList";
     }
     @PostMapping("/mypetboard/review/updateReview")
-    public String updatereview(Review review) {
+    public String updatereview(@AuthenticationPrincipal PrincipaDetailsMember userDetails, Review review) {
         System.out.println("-----POST updatereview");
-        reviewService.updateReview(review);
+
+        Review findReview = reviewService.findById(review.getSeq());
+        if(userDetails.getMember().getMemberNumberSeq() == findReview.getMember().getMemberNumberSeq()){
+            reviewService.updateReview(review);
+        }else{
+            System.out.println("아이디가 아닙니다.");
+        }
         return "redirect:/mypetboard/review/reviewList";
     }
 }

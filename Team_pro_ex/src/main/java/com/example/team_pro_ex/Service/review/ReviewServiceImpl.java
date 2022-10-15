@@ -78,6 +78,11 @@ public class ReviewServiceImpl implements ReviewService {
         System.out.println("-----service findByWriter-----");
         return reviewRepo.findByWriterContaining(pageable, keyword);
     }
+    //회원 아이디(자신의 아이디)로만 문의사항 삭제하기 위해서
+    @Override
+    public List<Review> findALLMemberorReview() {
+        return reviewRepo.findAllByMember();
+    }
 
 
 }

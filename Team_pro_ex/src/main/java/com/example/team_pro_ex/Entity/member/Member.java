@@ -16,13 +16,12 @@ import java.util.List;
 //@Builder
 
 //@Entity JPA가 이 객체를 기준으로 table을 만들어야 한다고 선언
-@ToString
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@NoArgsConstructor // @NoArgsConstructor 이걸로 생성자를 채워서 만든다. (access = AccessLevel.PROTECTED)
+@AllArgsConstructor // 전부다 꽉채워진 생성자를 만든다.
+@Builder // @Builde 만들면 비어있는 생성자를 만들었다.
 @DynamicInsert
 @DynamicUpdate
 public class Member extends member_BaseEntity {
@@ -38,7 +37,7 @@ public class Member extends member_BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long member_Number_Seq;
+    private Long memberNumberSeq;
 
 
     @Column(name = "member_id", length = 20, nullable = false, unique = true)
@@ -48,6 +47,7 @@ public class Member extends member_BaseEntity {
     private String id;  // 아이디
 
     @Column(name = "member_password",length = 70)
+    //회원 탈퇴를 할 때 어쩔 수 없이 사용해야 됨
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,70}", message = "영문 대 소문자, 숫자를 포함한 특수문자를 사용하세요.")
     private String password; // 비밀번호
 
@@ -82,9 +82,15 @@ public class Member extends member_BaseEntity {
 
     // mappedBy => 본인 클래스를 적는다.
     // review에 선언한 Member변수를 적음
+    // fetch = FetchType.EAGER = 한번 조회할 때 entity 다 가져옴
+    // fetch = FetchType.LAZY = 조회할때만 가져옴
+    // proxy = 주입하려면 proxy가 필요하다. => entry point가 proxy다
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Review> reviewList;
+    private List<Review> reviewList = new ArrayList<>(); // new ArrayList<>() => 초기화한다.
 
-
+    public Member setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
+        return this;
+    }
 }
 

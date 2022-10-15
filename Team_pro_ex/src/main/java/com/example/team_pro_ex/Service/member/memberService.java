@@ -22,7 +22,7 @@ public interface memberService {
     //회원가입
     void insertMember(Member member);
     //회원정보 수정
-    void updateMember(Member member);
+    public Member updateMember(Member member);
 
 
     //회원탈퇴 = > 회원정보를 삭제하면 안되는 이유는 회원의 정보는 회사(우리)에게 돈이 되기 때문에
@@ -41,6 +41,8 @@ public interface memberService {
     Member getMemberWhereId(String id);
 
     void idCheck(Member member);
+
+    Member getMembers(Member member);
 
 
 }

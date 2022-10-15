@@ -28,6 +28,7 @@ public interface ReviewService {
     Page<Review> findByContent(Pageable pageable, String keyword);
     Page<Review> findByWriter(Pageable pageable, String keyword);
 
-
+    //회원 아이디(자신의 아이디)로만 문의사항 삭제하기 위해서
+    public List<Review> findALLMemberorReview();
 
 }

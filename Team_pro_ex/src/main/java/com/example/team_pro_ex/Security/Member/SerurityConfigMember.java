@@ -1,10 +1,8 @@
 package com.example.team_pro_ex.Security.Member;
 
-import com.example.team_pro_ex.com.Entity.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,27 +10,26 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-
-import javax.sql.DataSource;
 
 
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) //security 어노테이션 활성화
-public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
+public class SerurityConfigMember {
 
     //로그인 실패 핸들러 의존성 주입
     private final AuthenticationFailureHandler customAuthFailureHandler;
 
-    @Override
-    public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers("/css/**","/js/**","/imges/**","/fonts/**","/webpageimg/**");
-    }
-    @Override
-    protected void configure(HttpSecurity http) throws Exception{
-        http.authorizeRequests()
+
+
+    @Bean // = > 생성해서 주입한다.
+    public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception{
+                    // qcsrf(). =>  방어하는 것. 로그아웃 처리할 떄 csrf토큰도 보내준다.
+        return http.csrf().disable().
+                authorizeRequests()
                 //매니저는 회원, 사업자에 접근할 수 있다.
                 // antMatchers("/**").permitAll() => 모든 경로에 권한없이 접근가능
                 // antMatchers().authenticated() => 모든 요청에 인증된
@@ -45,9 +42,8 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 // 요청 패스에 정규 표현식을 사용할 수 있는 regexMatchers() 메소드도 있다.
                 .regexMatchers("/Member/[^(mJoin/Join)|(Login)|(mUpdate/Update)|(mDelete/upDelete)].*").
                 access("hasRole('ADMIN') or hasRole('MEMBER') or hasRole('MANAGER')")
-                .antMatchers("/mypetboard/**").access("hasRole('ADMIN') or hasRole('MEMBER')")
-//                .regexMatchers("/businessMember/[^(bmJoin/bm_Join)].*").
-//                access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/mypetboard/**")//리퀘스트랑 맵핑
+                .access("hasRole('ADMIN') or hasRole('MEMBER') or hasRole('MANAGER')")
                 //설정해준거 외에는 어디든지 접근가능하다. .anyRequest().permitAll()
                 .anyRequest().permitAll()
                 .and()
@@ -60,15 +56,15 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 .failureHandler(customAuthFailureHandler)
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/logins")
+                .logoutUrl("/logout") //시큐리트에서 만들어진 logout을 걸쳐서 logoutSuccessUrl에 설정한 페이지로 넘어간다
+                .logoutSuccessUrl("/")
                 //로그아웃 후 세션 전체 삭제여부
                 .invalidateHttpSession(true).deleteCookies("JSESSIONID", "remember-me")
-                .and()
                 //403 예외처리 핸들링
-                .exceptionHandling().accessDeniedPage("/index");
+                .and().build();
 
     }
+
 
 
 //     @Override
@@ -91,10 +87,12 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public BCryptPasswordEncoder encoder() {
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
 
 
 }
+//                .regexMatchers("/businessMember/[^(bmJoin/bm_Join)].*").
+//                access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")

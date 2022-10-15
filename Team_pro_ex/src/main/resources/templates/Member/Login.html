@@ -25,6 +25,8 @@
             <a class="logo" href="#">My Pet</a>
         </div>
         <form th:action="@{/logins}" method="post">
+            <!--현재 csrf 토큰이 필요없어서 안씀 / 시큐리티컨피그에 csrf를 사용해야 로그아웃 처리가 됨-->
+           <!-- <input type="hidden" th:name="_csrf" th:value="${_csrf.token}">-->
             <div id="container">
                 <div class="login-containter">
                     <div class="login-containter-child">

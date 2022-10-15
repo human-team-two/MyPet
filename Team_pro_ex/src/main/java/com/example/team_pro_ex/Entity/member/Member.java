@@ -1,12 +1,15 @@
 package com.example.team_pro_ex.Entity.member;
 
 import com.example.team_pro_ex.Entity.Base.member_BaseEntity;
+import com.example.team_pro_ex.Entity.review.Review;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 //@AllArgsConstructor : 모든 매개변수를 갖는 생성자
 //@NoArgsConstructor(access = AccessLevel.PROTECTED) : 매개변수 없는 생성자
@@ -39,6 +42,8 @@ public class Member extends member_BaseEntity {
 
 
     @Column(name = "member_id", length = 20, nullable = false, unique = true)
+    //  "(?=.*[0-9])(?=.*[a-z]).{8,16}" => 정규식 : (?=.*[0-9]) = 0~9, (?=.*[a-z]) = 소문자 a~z ,
+    //  {8,16} = 8글자 이상 16자 이하 입력가능
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z]).{8,16}", message = "아이디는 8~16자 영문 소문자, 숫자를 사용하세요.")
     private String id;  // 아이디
 
@@ -74,6 +79,11 @@ public class Member extends member_BaseEntity {
 
     @Column(name = "member_join_M", length = 1, nullable = false)
     private String joinM = "Y"; //--가입상태
+
+    // mappedBy => 본인 클래스를 적는다.
+    // review에 선언한 Member변수를 적음
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Review> reviewList;
 
 
 }

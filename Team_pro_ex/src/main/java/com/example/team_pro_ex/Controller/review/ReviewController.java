@@ -1,10 +1,12 @@
 package com.example.team_pro_ex.Controller.review;
 
 import com.example.team_pro_ex.Entity.review.Review;
+import com.example.team_pro_ex.Security.Member.PrincipaDetailsMember;
 import com.example.team_pro_ex.Service.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,8 @@ public class ReviewController {
     }
 
     @GetMapping("/mypetboard/review/insertreview")
-    public void insertReview() {
+    public void insertReview(@AuthenticationPrincipal PrincipaDetailsMember userDetails, Model model) {
+        model.addAttribute(userDetails.getMember());
         System.out.println("-----GET insertreview");
     }
 
@@ -58,14 +61,14 @@ public class ReviewController {
         model.addAttribute("reviewList", reviews);
         model.addAttribute("scategory", scategory);
         model.addAttribute("keyword", keyword);
-        return "/mypetboard/review/reviewList";
+        return "mypetboard/review/reviewList";
     }
 
     @GetMapping("/mypetboard/review/getreview")
     public String getreview(Model model, Review review) {
         System.out.println("-----GET getreview");
         model.addAttribute("reviewList", reviewService.getReview(review));
-        return "/mypetboard/review/getreview";
+        return "mypetboard/review/getreview";
     }
     @GetMapping("/mypetboard/review/removeReview")
     public String removereview(Review review) {

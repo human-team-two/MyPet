@@ -44,7 +44,8 @@ public class SerurityConfigMember extends WebSecurityConfigurerAdapter {
                 // .regexMatchers() => antMatcher() 메소드가 Ant 스타일 와일드카드를 포함한 패스로 동작하는 반면,
                 // 요청 패스에 정규 표현식을 사용할 수 있는 regexMatchers() 메소드도 있다.
                 .regexMatchers("/Member/[^(mJoin/Join)|(Login)|(mUpdate/Update)|(mDelete/upDelete)].*").
-                access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MEMBER') or hasRole('ROLE_MANAGER')")
+                access("hasRole('ADMIN') or hasRole('MEMBER') or hasRole('MANAGER')")
+                .antMatchers("/mypetboard/**").access("hasRole('ADMIN') or hasRole('MEMBER')")
 //                .regexMatchers("/businessMember/[^(bmJoin/bm_Join)].*").
 //                access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
                 //설정해준거 외에는 어디든지 접근가능하다. .anyRequest().permitAll()

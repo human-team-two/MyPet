@@ -1,8 +1,10 @@
 package com.example.team_pro_ex.Controller.member;
 
+import com.example.team_pro_ex.Security.Member.PrincipaDetailsMember;
 import com.example.team_pro_ex.Entity.member.Member;
 import com.example.team_pro_ex.Service.member.memberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,7 +20,7 @@ import java.util.Map;
 @RequestMapping(path = "/Member")
 public class memberController {
 
-    private final com.example.team_pro_ex.Service.member.memberService memberService;
+    private final memberService memberService;
 
     @Autowired
     protected memberController(memberService memberservice){
@@ -43,26 +45,9 @@ public class memberController {
         System.out.println("get mapping account !!");
         System.out.println("get방식으로 인한 Join페이지 = 우리가 처음 join페이지를 들어갈 떄는 null값이 뜰 수 밖에없다.");
         System.out.println("왜냐!!?!? 값이 없으니까!");
-        System.out.println(member.getName());
-        System.out.println(member.getPetW());
-        Member member_1 = new Member(
-                member.getMember_Number_Seq(), // 회원인원 몇명인지!
-                member.getId(), //아이디, 회원등록 번호 : PK
-                member.getPassword(), //비밀번호
-                member.getName(), //이름
-                member.getYear(), //(회원) 생년월일
-                member.getPhoneNumber(), // 핸드폰 번호
-                member.getAddress(), //주소
-                member.getPetT(), // 애견, 애묘 : 종류
-                member.getPetD(), // 애견, 애묘 : 생년월일
-                member.getPetW(), // 애견, 애묘 : 몸무게
-                member.getRole(), // 권한 : 관리자, 사업자, 회원
-                member.getJoinM());// Y는 현재 가입상태 => 모든 회원은 처음 가입할 떄 가입상태 Y로 시작을 한다. /
-        // 탈퇴할 경우는 update로 N으로 수정된다.
-        model.addAttribute("member", member_1);
+        model.addAttribute(new Member());
         return "Member/mJoin/Join";
     }
-    //일반 회원가입
     @PostMapping("/mJoin/Join")
     public String insertMember(@Valid Member member, Errors errors, Model model){
         System.out.println("---check---");
@@ -112,27 +97,13 @@ public class memberController {
 
 
     @GetMapping("/mUpdate/Update") //마이 페이지 수정폼
-    public String myPage(Member member, Model model){
+    //@AuthenticationPrincipal PrincipaDetailsMember userDetails => 로그인한 인증 된 정보를 가져온다.
+    public String myPage(@AuthenticationPrincipal PrincipaDetailsMember userDetails, Model model){
         System.out.println("get mapping account !!");
         System.out.println("get방식으로 인한 Join페이지 = 우리가 처음 join페이지를 들어갈 떄는 null값이 뜰 수 밖에없다.");
         System.out.println("왜냐!!?!? 값이 없으니까!");
-        System.out.println(member.getName());
-        System.out.println(member.getPetW());
-        Member member_1 = new Member( // null값이라서 값을 받아올 수가 없다....
-                member.getMember_Number_Seq(), // 회원인원 몇명인지!
-                member.getId(), //아이디, 회원등록 번호 : PK
-                member.getPassword(), //비밀번호
-                member.getName(), //이름
-                member.getYear(), //(회원) 생년월일
-                member.getPhoneNumber(), // 핸드폰 번호
-                member.getAddress(), //주소
-                member.getPetT(), // 애견, 애묘 : 종류
-                member.getPetD(), // 애견, 애묘 : 생년월일
-                member.getPetW(), // 애견, 애묘 : 몸무게
-                member.getRole(), // 권한 : 관리자, 사업자, 회원
-                member.getJoinM());// Y는 현재 가입상태 => 모든 회원은 처음 가입할 떄 가입상태 Y로 시작을 한다. /
-        // 탈퇴할 경우는 update로 N으로 수정된다.
-        model.addAttribute("member", member_1);;
+        //객체로 주입하면 thyreef에서는 객체 member로 받는다.
+        model.addAttribute(userDetails.getMember());
         return "/Member/mUpdate/Update";
     }
 
@@ -142,6 +113,7 @@ public class memberController {
         System.out.println("---회원 정보 수정이 이루어 진다.---");
         System.out.println("---check---");
         System.out.println("---PostMapping 실제로 여기서 값이 들어감---");
+        System.out.println("시퀀스 넘버 : "+ member.getMember_Number_Seq());
         System.out.println("아이디 : "+ member.getId());
         System.out.println("비밀번호 : "+ member.getPassword());
         System.out.println("이름 : "+ member.getName());
@@ -172,6 +144,7 @@ public class memberController {
             }
             return "redirect:/Member/mUpdate/Update"; //로그안 페이지로 왜 안돌아가는지 모르겠다.
         }
+        System.out.println("컨트롤라 : "+member.getId());
         memberService.updateMember(member);
 
         return "redirect:/Member/loginPage";
@@ -201,10 +174,11 @@ public class memberController {
 
 
     //회원을 삭제하는게 아니라 수정한다. ID, Name, Join_m 및 날짜 테이블의 join_O을 제외한 값 전부 Null
+    //model.addAttribute(userDetails.getMember());
     @PostMapping("/mDelete/upDelete")
-    public String deleteUpdateMember(Member member){
+    public String deleteUpdateMember(@AuthenticationPrincipal PrincipaDetailsMember userDetails){
         System.out.println("-------delete-------");
-        memberService.deleteUpdateMember(member);
+        memberService.deleteUpdateMember(userDetails.getMember());
         return "redirect:/Member/loginPage";
     }
 

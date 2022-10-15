@@ -1,6 +1,6 @@
 package com.example.team_pro_ex.Entity.mypetboard.accommodation;
 
-import com.example.team_pro_ex.Entity.member.OwnerMember;
+import com.example.team_pro_ex.Entity.member.Member;
 import com.example.team_pro_ex.Entity.mypetboard.common.BoardCommon;
 import lombok.*;
 
@@ -22,27 +22,22 @@ public class Accommodation extends BoardCommon implements Serializable {
     @Column(name = "Acc_seq")
     private Long seq;
 
-
-    private Long ownerMemberSeq;
-
-
-    private Long categorySeq;
-
-
     private String detailCategory;
+
+    private String imgname;
 
     //조인 외래키 설정 1:N  양방향 매핑 참조삭제(숙소:룸)
     @OneToMany(mappedBy = "accommodation" , cascade = CascadeType.ALL)
     private List<Room> RoomList;
-//
-//    public void add(Room room) {
-//        room.setAccommodation();
-//        getRoomList().add(room);
-//    }
+
+    @OneToMany(mappedBy = "accommodation" , cascade = CascadeType.ALL)
+    private List<AccommodationAnswer> accommodationAnswerList;
+
     //조인 사업자회원:숙소
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "ownerMemberSeq")
-    private OwnerMember ownerMember;
+    @JoinColumn(referencedColumnName = "member_Number_seq")
+    private Member member;
+
 
 
     public static Room createRoom(Accommodation accommodation){

@@ -14,9 +14,9 @@ public interface AccommodationService {
 
     Long insertAccommodation(Accommodation accommodation);
 
-
-
     Accommodation getAccommodation(Accommodation accommodation);
+
+    Accommodation getAccommodationAnswer(Long seq);
 
     void updateAccommodation(Accommodation accommodation);
 

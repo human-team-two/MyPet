@@ -1,5 +1,6 @@
 package com.example.team_pro_ex.Entity.mypetboard.hospital;
 
+import com.example.team_pro_ex.Entity.member.Member;
 import com.example.team_pro_ex.Entity.mypetboard.common.BoardCommon;
 import lombok.*;
 
@@ -18,8 +19,15 @@ public class Hospital extends BoardCommon {
     @Column(name = "seq" )
     private Long seq;
 
+    private Long categorySeq;
+
+    private String detailCategory;
 
 
+    private String imgname;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "member_Number_seq")
+    private Member member;
 }

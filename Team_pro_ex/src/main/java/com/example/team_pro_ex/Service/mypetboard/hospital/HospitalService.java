@@ -1,5 +1,6 @@
 package com.example.team_pro_ex.Service.mypetboard.hospital;
 
+
 import com.example.team_pro_ex.Entity.mypetboard.common.HospitalImage;
 import com.example.team_pro_ex.Entity.mypetboard.hospital.Hospital;
 import org.springframework.data.domain.Page;
@@ -19,4 +20,8 @@ public interface HospitalService {
     Long insertHospitalImage(HospitalImage hospitalImage);
 
     HospitalImage getHospitalImageEntity(Long HotelSeq);
+
+    Page<Hospital> getHospitalContainsName(String Keyword, Pageable pageable);
+
+    Page<Hospital> findCategoryAndKeyword(String Keyword, Pageable pageable);
 }

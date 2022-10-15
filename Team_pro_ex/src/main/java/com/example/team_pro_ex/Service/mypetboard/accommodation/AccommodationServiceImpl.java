@@ -51,6 +51,18 @@ public class AccommodationServiceImpl implements AccommodationService {
     }
 
     @Override
+    public Accommodation getAccommodationAnswer(Long seq) {
+        Optional<Accommodation> accommodation = accommodationRepo.findById(seq);
+        if(accommodation.isPresent()) {
+            return accommodation.get();
+        }
+        else {
+            throw new DataNotFoundException("Accommodation not found");
+        }
+
+    }
+
+    @Override
     public void updateAccommodation(Accommodation accommodation) {
         Accommodation updateAccommodation = accommodationRepo.findById(accommodation.getSeq()).get();
 

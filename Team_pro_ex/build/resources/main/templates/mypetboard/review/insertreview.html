@@ -32,8 +32,6 @@
             <form th:action="@{/mypetboard/review/insertreview}" method="post">
                 <input type="hidden" name="page" value="0">
                 <input type="hidden" name="size" value="3">
-                <input class="input-group-text" type = "hidden" name = "writer" th:value="${member.id}" size="25"
-                       placeholder="작성자를 입력하세요" aria-label="작성자를 입력하세요"/>
             <table class="table table-striped" th:align="center" th:border="1" th:cellpadding="0" th:cellspacing="0">
                 <tr>
                     <td th:width = "100" align="center">분류</td>
@@ -47,7 +45,8 @@
                 </tr>
                 <tr>
                     <td th:width="100" th:align="center">작성자</td>
-                    <td><span th:text="${member.id}"></span></td>
+                    <td><input class="input-group-text" type = "text" name = "writer"  size="25"
+                               placeholder="작성자를 입력하세요" aria-label="작성자를 입력하세요"/></td>
                 </tr>
                 <tr>
                     <td th:align="center">제목</td>

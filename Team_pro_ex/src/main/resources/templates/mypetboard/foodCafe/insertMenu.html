@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+<div w3-include-html="header.html"></div>
+<div id="warapper">
+    <a class="logo block" href="main.html"></a>
+    <form id="container" th:action="@{|/mypetboard/foodCafe/insertMenu/${foodcafe.seq}|}" method="post" enctype="multipart/form-data">
+        <div>
+            <p class="join-p-size" >메뉴 이름</p>
+            <input type="text" class="border" name="menuName" placeholder="메뉴 이름 입력">
+        </div>
+        <div>
+            <p class="join-p-size">메뉴 상세정보</p>
+            <input type="text" class="border"  name="menuInfo" placeholder="메뉴 상세 정보 입력">
+        </div>
+        <div>
+            <p class="join-p-size">메뉴 가격</p>
+            <input type="text" class="border"  name="menuPrice" placeholder="메뉴 가격 정보 입력">
+        </div>
+        <div>
+            <p class="join-p-size">메뉴타입</p>
+            <select name="menuType" title="2">
+                <option value="음료">음료</option>
+                <option value="음식">음식</option>
+            </select>
+        </div>
+
+        <input type="file" name="menuimage" multiple ="multiple">
+        <div>
+            <input class="border" type="submit" value="메뉴추가">
+        </div>
+    </form>
+    <div>
+        <ul>
+            <li th:each= "menu : ${foodcafe.menuList}">
+                <div th:text="${menu.menuName}"></div>
+                <div th:text="${menu.menuType}"></div>
+                <div th:text="${menu.menuPrice}"></div>
+                <div th:text="${menu.menuInfo}"></div>
+            </li>
+        </ul>
+    </div>
+    <tr>
+        <td th:each="img :${mimgLoading}">
+            <img th:src="@{${img}}" alt="gallery">
+        </td>
+    </tr>
+</div>
+<a th:href="@{/mypetboard/foodCafe/getFoodCafeList}"><span>등록완료</span></a>
+
+<footer th:replace="common/footer :: footer"></footer>
+
+<script>
+    includeHTML();
+</script>
+
+<!--주소 api -->
+<script src="/js/Addressapi.js"></script>
+</body>
+</html>

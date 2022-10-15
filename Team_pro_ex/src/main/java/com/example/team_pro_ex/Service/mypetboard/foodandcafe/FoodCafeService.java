@@ -21,4 +21,11 @@ public interface FoodCafeService {
     Long insertFoodCafeImage(FoodCafeImage foodcafeImage);
 
     FoodCafeImage getFoodCafeImageEntity(Long foodCafeSeq);
+
+
+    Page<FoodCafe> getFoodCafeContainsName(String keyword , Pageable pageable);
+
+    Page<FoodCafe> findCategoryAndKeyword(String keyword, Pageable pageable);
+
+    FoodCafe getFoodCafeRequest(Long seq);
 }

@@ -1,52 +1,106 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Accommodation List</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/htmlimage/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/boardList.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
 </head>
 <body>
-<nav class="navbar navbar-light bg-dark">
-    <div class="container-fluid">
-        <a class="text-white" th:href="@{/member/ownermember/insertOwnerMember}">사업자회원가입</a>
-        <a class="text-white" th:href="@{/mypetboard/accommodation/getAccommodationList}">숙소목록</a>
-        <a class="text-white" th:href="@{/mypetboard/beauty/getBeautyList}">애견미용실목록</a>
-        <a class="text-white" th:href="@{/mypetboard/hospital/getHospitalList}">병원목록</a>
-        <a class="text-white" th:href="@{/mypetboard/foodCafe/getFoodCafeList}">음식점카페목록</a>
-        <form class="d-flex">
-            <input class = "form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button  class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
-<h1>가게 목록</h1>
-<table class="table table-striped" border="1" cellpadding="0" cellspacing="0" width="700" >
-    <tr>
-        <th width="200">가게번호</th>
-        <th width="200">가게이름</th>
-        <th width="200">상세정보</th>
-    </tr>
 
-    <tr th:each=" foodcafe : ${foodcafeList}">
-        <td th:name="seq" th:text = "${foodcafe.seq}"></td>
-        <td><a th:href="@{getFoodCafe(seq = ${foodcafe.seq})}"
-               th:text="${foodcafe.storeName}"></a> </td>
-        <td th:text="${foodcafe.info}"></td>
-    </tr>
-</table>
-<div th:if ="${!foodcafeList.isEmpty()}" class="pagination justify-content-center" >
+<!-- Header-->
+<header th:replace="common/header :: header"></header>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5" th:each="foodCafe : ${foodCafeList}">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" th:src="@{|/images/${foodCafe.imgname}|}" alt="경로확인"/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <a class="fw-bolder" th:href="@{getFoodCafe(seq = ${foodCafe.seq})}" th:text="${foodCafe.storeName}"></a>
+                            <!-- Product price-->
+                            <div th:text="${foodCafe.detailCategory}"></div>
+                            <div th:text="${foodCafe.info}"></div>
+                        </div>
+                    </div>
+                    <td><a class="btn btn-secondary border-secondary float-right" style="background-color: #6667AB;"
+                           th:href="@{|/mypetboard/foodCafe/insertMenu/${foodCafe.seq}|}" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')"> 메뉴등록 </a> </td>
+                    <td> <button th:onclick="btnDel([[${foodCafe.seq}]]);" sec:authorize="hasAnyAuthority('ROLE_MANAGER')">가게삭제</button></td>
+
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<a class="btn btn-secondary border-secondary" th:href="@{/mypetboard/foodCafe/insertFoodCafe}" sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')">음식점카페등록</a>
+<form th:action="@{/mypetboard/foodCafe/getfoodCafeList}" method="GET">
+   <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+         <span style="display:flex; justify-content:flex-end; align-items:center;">
+            <select style="height: 42.5px;" type="text" name="detailCategory" th:value="${detailCategory}">
+                <option value="" selected disabled hidden>==카테고리 선택==</option>
+                <option th:value="음식점">음식점</option>
+                <option th:value="카페">카페</option>
+            </select>
+        </span>
+           <span>
+            <input type="text" class="form-control" id="searchKeyword" name="searchKeyword" th:value="${searchKeyword}" placeholder="검색어 입력" autocomplete="off">
+           </span>
+       <span>
+       <button class="form-control"  style="color:#ffffffcc; background-color: #6667AB; width: 150px;" type="submit">Search</button>
+       </span>
+   </div>
+</form>
+
+
+<div th:if ="${!foodCafeList.isEmpty()}" class="pagination justify-content-center" >
     <ul>
-        <li class="btn btn-secondary border-secondary" th:classappend="${foodcafeList.hasPrevious()} ? 'disabled'" >
-            <a class="btn btn-secondary btn-secondary" th:href="@{|?page=${previous}|}">이전</a>
+        <li class="btn btn-secondary border-secondary" style="background-color: #6667AB;" th:classappend="${foodCafeList.hasPrevious()} ? 'disabled'" >
+            <a  th:href="@{|?page=${previous}|}">이전</a>
         </li>
-        <li class="btn btn-secondary border-secondary" th:classappend="${foodcafeList.hasNext()} ? 'disabled'" >
-            <a class="btn btn-secondary btn-secondary" th:href="@{|?page=${next}|}">다음</a>
+        <li class="btn btn-secondary border-secondary" style="background-color: #6667AB;"th:classappend="${foodCafeList.hasNext()} ? 'disabled'" >
+            <a  th:href="@{|?page=${next}|}">다음</a>
         </li>
     </ul>
-
 </div>
-<div class="justify-content-end">
-<a class="btn btn-secondary border-secondary"  th:href="@{/mypetboard/foodCafe/insertFoodCafe}">음식점카페등록</a>
-</div>
+<!-- Footer-->
+<footer th:replace="common/footer :: footer"></footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<script>
+    // 삭제 클릭 시 --> 컨펌 후 --> 할 일 처리
+    function btnDel( seq ) {
+        // 컨펌 처리
+        if( confirm( seq + "번 게시글을 정말 삭제하시겠습니까?") == true ) {
+            location.href = '/mypetboard/accommodation/deleteAccommodation?seq=' + seq;
+            //실제 삭제할 데이터를 쿼리스트링을 이용해 전달
+        }
+        else {
+            return;
+        }
+    }
+</script>
 </body>
 </html>

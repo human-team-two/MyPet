@@ -4,12 +4,10 @@ import com.example.team_pro_ex.Entity.mypetboard.beauty.Beauty;
 import com.example.team_pro_ex.Entity.mypetboard.common.BeautyImage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
 
 public interface BeautyService {
-
     Page<Beauty> getBeautyList(Pageable pageable);
 
     Long insertBeauty(Beauty beauty);
@@ -22,6 +20,11 @@ public interface BeautyService {
 
     Long insertBeautyImage(BeautyImage beautyImage);
 
-    BeautyImage getbeautyImageEntity(Long BeautySeq);
+    BeautyImage getBeautyImageEntity(Long beautySeq);
 
+    Page<Beauty> getBeautyContainsName(String Keyword, Pageable pageable);
+
+    Beauty getBeautyRequest(Long seq);
+
+    List<BeautyImage> getBeautyImageList(BeautyImage BeautyImage);
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>룸 등록페이지</title>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
@@ -10,11 +10,11 @@
     <link rel="stylesheet" type="text/css" href="/css/join.css"/>
 </head>
 <body>
-
-<div w3-include-html="header.html"></div>
+<div th:replace="common/header" :: header></div>
 <div id="warapper">
     <a class="logo block" href="main.html"></a>
     <form id="container" th:action="@{|/mypetboard/accommodation/insertRoom/${accommodation.seq}|}" method="post" enctype="multipart/form-data">
+
         <div>
             <p class="join-p-size" >룸 이름</p>
             <input type="text" class="border" name="roomName" placeholder="룸 이름 입력">
@@ -37,6 +37,12 @@
             <input class="border" type="submit" value="룸추가">
         </div>
     </form>
+    <section class="py-5 bg-light">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h2 class="fw-bolder mb-4">Related Accommodation</h2>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="col mb-5"   >
+                    <div class="card h-100"   >
     <div>
         <ul>
             <li th:each="room : ${accommodation.roomList}">
@@ -49,19 +55,22 @@
     </div>
     <tr>
         <td th:each="img :${rimgLoading}">
-            <img th:src="@{${img}}" alt="gallery">
+            <img style="width: 200px; height: 300px" th:src="@{${img}}" alt="gallery">
         </td>
     </tr>
 </div>
-<a  th:href="@{/mypetboard/accommodation/getAccommodationList}"><span></span></a>
-
-<div w3-include-html="footer.html"></div>
-
+                </div>
+                </div>
+        </div>
+    </section>
+<a class="border" th:href="@{/mypetboard/accommodation/getAccommodationList}"><span>등록완료</span></a>
+    <footer th:replace="common/footer :: footer"></footer>
 <script>
     includeHTML();
 </script>
 
 <!--주소 api -->
 <script src="/js/Addressapi.js"></script>
+</div>
 </body>
 </html>

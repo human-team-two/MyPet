@@ -16,7 +16,7 @@ public class FoodCafeImage {
 
     @Id
     @GeneratedValue
-    private Long imageSeq;
+    private Long seq;
 
     private String uuid;
 

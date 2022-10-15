@@ -18,7 +18,9 @@
     <block th:replace="common/dropmenu :: menu"></block>
 
 </head>
+
 <body>
+<header th:replace="common/header :: header"></header>
 <!-- Accommodation section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -121,21 +123,18 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="col mb-5"   >
-            <div class="card h-100"   >
-                <div id="map" style="width:500px;height:350px;"></div>
-            </div>
+        <div class="col mb-6"   >
+            <div>숙소 지도</div>
+            <div id="map" style="width:500px;height:350px;"></div>
+
         </div>
     </div>
     </div>
 </section>
 
 <!-- Footer-->
-<footer class="py-5 bg-dark">
-    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
-</footer>
+<footer th:replace="common/footer :: footer"></footer>
 
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

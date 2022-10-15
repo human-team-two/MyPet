@@ -1,11 +1,10 @@
 package com.example.team_pro_ex.Controller.mypetboard;
 
-import com.example.team_pro_ex.Entity.member.OwnerMember;
 import com.example.team_pro_ex.Entity.mypetboard.accommodation.Accommodation;
 import com.example.team_pro_ex.Entity.mypetboard.accommodation.Room;
 import com.example.team_pro_ex.Entity.mypetboard.common.AccommodationImage;
 import com.example.team_pro_ex.Entity.mypetboard.common.RoomImage;
-import com.example.team_pro_ex.Service.member.OwnerMemberService;
+import com.example.team_pro_ex.Security.Member.PrincipaDetailsMember;
 import com.example.team_pro_ex.Service.mypetboard.accommodation.AccommodationService;
 import com.example.team_pro_ex.Service.mypetboard.accommodation.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.UUID;
 
 /*
- * * Board domain CONTROLLER
+ * * Accommodation domain CONTROLLER
  * @Param String HTML에서 받아온 데이터
  * @return String HTML 파일과 연결을 위해 사용(ViewResolber)
  * @ author(작성자) 이승현
@@ -40,21 +40,21 @@ import java.util.UUID;
 @RequestMapping(path = "/mypetboard/accommodation")
 public class AccommodationController {
     private final AccommodationService accommodationService;
-    private final OwnerMemberService ownerMemberService;
+
 
     private final RoomService roomService;
 
 
     //생성자 주입
     @Autowired
-    protected AccommodationController(AccommodationService accommodationService, OwnerMemberService ownerMemberService, RoomService roomService) {
+    protected AccommodationController(AccommodationService accommodationService,  RoomService roomService) {
 
         this.accommodationService = accommodationService;
-        this.ownerMemberService = ownerMemberService;
         this.roomService = roomService;
     }
     @GetMapping("/insertAccommodation")
-    public String insertAccommodationView(Accommodation accommodation, Model model , OwnerMember ownerMember) {
+    public String insertAccommodationView( Accommodation accommodation, Model model) {
+
         //model.addAttribute("ownerMember", ownerMemberService.getOwnerMember(ownerMember));
 
 
@@ -64,19 +64,25 @@ public class AccommodationController {
 
     //로컬 저장소에 저장 (DB에 값 저장)
     @PostMapping("/insertAccommodation")
-    public String insertAccommodation(Accommodation accommodation,  @RequestParam(value = "accommodationimage" , required = false)MultipartFile[] accommodationimage) {
+    public String insertAccommodation(Accommodation accommodation, @AuthenticationPrincipal PrincipaDetailsMember userDetails ,
+                                      @RequestParam(value = "accommodationimage" , required = false)MultipartFile[] accommodationimage) {
 
         try{
-            accommodation.setCreateDate(new Date());
-            accommodation.setBookingDate(new Date());
-            //게시글 정보 저장
-            Long accommodationSeq = accommodationService.insertAccommodation(accommodation);
+
             //파일의 메타데이터 저장
             for(MultipartFile file : accommodationimage) {
                 if(!file.isEmpty()){
+                    /*accommodation ImgName컬럼에 uuid + originalfilename 형식으로 저장*/
+                    accommodation.setCreateDate(new Date());
+                    accommodation.setBookingDate(new Date());
+                    accommodation.setMember(userDetails.getMember());
+                    String uuid = UUID.randomUUID().toString();
+                    accommodation.setImgname(uuid+"_"+file.getOriginalFilename());
 
+                    //게시글 정보 저장
+                    Long accommodationSeq = accommodationService.insertAccommodation(accommodation);
                     AccommodationImage entity = new AccommodationImage(null,
-                            UUID.randomUUID().toString(),
+                            uuid,
                             file.getContentType(),
                             file.getName(),
                             file.getOriginalFilename(),
@@ -85,10 +91,15 @@ public class AccommodationController {
                     accommodationService.insertAccommodationImage(entity);
 
 
-                    File newFileName = new File(entity.getUuid()+"_"+ entity.getOriginalFilename());
+                    File newFileName = new File(uuid+"_"+ entity.getOriginalFilename());
                     //서버에 이미지 파일 업로드(저장)
                     file.transferTo(newFileName);
                 }
+                else {
+
+                    return "mypetboard/accommodation/insertAccommodation";
+            }
+
             }
         }
         catch (Exception e) {
@@ -103,7 +114,7 @@ public class AccommodationController {
     public ResponseEntity<byte[]> imageLoading(@PathVariable("imgname")String input_imgName) throws IOException {
         //ResponseEntity<Byte[]>:http 프로토콜을 통해서 byte 데이터를 전달하는 객체 , byte(소문자 = 기본타입)
         //@PathVariable: URL주소의 값을 받아옴
-        String path = "C:/work/MyPet/Team_pro_ex/src/main/resources/static/image/"+input_imgName;
+        String path = "C:/Users/Lee/Desktop/project/Team_pro_ex/image/"+input_imgName;
         //데이터(이미지)를 전송 하기 위한 객체로써 java에서는 항상 데이터를 스트림 타입으로 전달
         //객체(데이터 저장) :String,int,double
         //String객체는 파일을 컴퓨터가 cpu에서 바로 읽어 들일수 있도록 하는 갳체
@@ -167,7 +178,7 @@ public class AccommodationController {
         model.addAttribute("room2" ,   roomService.getRoomList().get(1));
         model.addAttribute("room3" ,   roomService.getRoomList().get(2));
         model.addAttribute("room4" ,   roomService.getRoomList().get(3));
-        model.addAttribute("room5" ,   roomService.getRoomList().get(4));
+
 
 
         /* 저장된 숙소이미지 불러와서 뷰에 뿌려주기 */
@@ -188,11 +199,11 @@ public class AccommodationController {
         model.addAttribute("rimgLoading2", path1.get(1));
         model.addAttribute("rimgLoading3", path1.get(2));
         model.addAttribute("rimgLoading4", path1.get(3));
-        model.addAttribute("rimgLoading5", path1.get(4));
 
 
 
-        return "/mypetboard/accommodation/getAccommodation1";
+
+        return "/mypetboard/accommodation/getAccommodation";
     }
     @GetMapping("/deleteAccommodation")
     public String deleteAccommodation(Accommodation accommodation){

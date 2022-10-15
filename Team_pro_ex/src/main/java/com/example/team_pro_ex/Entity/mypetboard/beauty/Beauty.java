@@ -1,5 +1,6 @@
 package com.example.team_pro_ex.Entity.mypetboard.beauty;
 
+import com.example.team_pro_ex.Entity.member.Member;
 import com.example.team_pro_ex.Entity.mypetboard.common.BoardCommon;
 import lombok.*;
 
@@ -15,9 +16,13 @@ import javax.persistence.*;
 public class Beauty extends BoardCommon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seq" )
+    @Column(name = "Beauty_seq" )
     private Long seq;
 
+    private String imgName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "member_Number_seq")
+    private Member member;
 
 }

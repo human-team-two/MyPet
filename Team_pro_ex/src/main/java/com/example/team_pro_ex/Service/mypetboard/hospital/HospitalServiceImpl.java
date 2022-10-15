@@ -1,5 +1,7 @@
 package com.example.team_pro_ex.Service.mypetboard.hospital;
 
+
+import com.example.team_pro_ex.Entity.mypetboard.accommodation.Accommodation;
 import com.example.team_pro_ex.Entity.mypetboard.common.HospitalImage;
 import com.example.team_pro_ex.Entity.mypetboard.hospital.Hospital;
 import com.example.team_pro_ex.repository.image.HospitalImageRepository;
@@ -17,7 +19,7 @@ public class HospitalServiceImpl implements HospitalService {
     private final HospitalImageRepository hospitalImageRepo;
 
     @Autowired
-    protected HospitalServiceImpl(HospitalRepository hospitalRepo,HospitalImageRepository hospitalImageRepo) {
+    protected HospitalServiceImpl(HospitalRepository hospitalRepo, HospitalImageRepository hospitalImageRepo) {
         this.hospitalRepo = hospitalRepo;
         this.hospitalImageRepo = hospitalImageRepo;
     }
@@ -36,7 +38,6 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
 
-
     @Override
     public Hospital getHospital(Hospital hospital) {
         return hospitalRepo.findById(hospital.getSeq()).get();
@@ -49,7 +50,7 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public void deleteHospital(Hospital hospital) {
-
+        hospitalRepo.deleteById(hospital.getSeq());
     }
 
     @Override
@@ -62,5 +63,15 @@ public class HospitalServiceImpl implements HospitalService {
     public HospitalImage getHospitalImageEntity(Long HospitalSeq) {
 
         return hospitalImageRepo.findByHospitalSeq(HospitalSeq);
+    }
+
+    @Override
+    public Page<Hospital> getHospitalContainsName(String keyword, Pageable pageable) {
+        return hospitalRepo.findByStoreNameContaining(keyword, pageable);
+    }
+
+    @Override
+    public Page<Hospital> findCategoryAndKeyword(String searchKeyword, Pageable pageable) {
+        return hospitalRepo.findCategoryAndKeyword(searchKeyword, pageable);
     }
 }

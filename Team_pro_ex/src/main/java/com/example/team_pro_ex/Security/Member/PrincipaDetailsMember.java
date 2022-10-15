@@ -21,8 +21,6 @@ public class PrincipaDetailsMember implements UserDetails {
     PrincipaDetailsMember(Member member){
         this.member = member;
     }
-
-
     //해당 User의 권한을 리턴하는 곳
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

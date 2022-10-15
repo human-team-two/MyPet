@@ -35,7 +35,7 @@ public class Accommodation extends BoardCommon implements Serializable {
 
     //조인 사업자회원:숙소
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "member_Number_seq")
+    @JoinColumn(referencedColumnName = "member_Number_Seq")
     private Member member;
 
 

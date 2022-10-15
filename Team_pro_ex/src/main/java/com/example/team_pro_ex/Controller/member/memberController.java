@@ -103,7 +103,7 @@ public class memberController {
         System.out.println("get방식으로 인한 Join페이지 = 우리가 처음 join페이지를 들어갈 떄는 null값이 뜰 수 밖에없다.");
         System.out.println("왜냐!!?!? 값이 없으니까!");
         //객체로 주입하면 thyreef에서는 객체 member로 받는다.
-        model.addAttribute(userDetails.getMember());
+        model.addAttribute(userDetails/**/.getMember());
         return "/Member/mUpdate/Update";
     }
 

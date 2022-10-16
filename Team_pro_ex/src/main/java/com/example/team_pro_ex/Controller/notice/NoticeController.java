@@ -154,7 +154,7 @@ import java.util.UUID;
     @GetMapping("/updateNotice")
     public String updateNoticeView(NoticeNotice notice, Model model) {
         model.addAttribute("notice", noticeService.getNotice(notice));
-        return "/Notice/insertNotice";
+        return "/Notice/getNotice";
     }
 
     //공지사항 삭제

@@ -4,8 +4,8 @@ article {
 
 .update-info {
   padding-top: 4em;
-  background-color: #f7323f;
-  color: #f0f0f0;
+  background-color: #6667AB;
+  color: #ffffff;
 }
 
 .update-info-h2 {
@@ -34,7 +34,7 @@ article {
   font-weight: bold;
 }
 .aside-nav ul li a.update-select {
-  color: #f7323f;
+  color: #6667AB;
 }
 
 .content form div {

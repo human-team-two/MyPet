@@ -64,18 +64,18 @@
     <a th:if="${session['member'].role == 'ROLE_ADMIN'}" th:href="@{/deleteBorad(seq=${board.seq})}">글삭제</a>
     글삭제는 ROLE_ADMIN 을 가진 사용자만 글삭제 가능하게 만든 것.
 -->
-
-<!--사업자 페이지-->
+<!--
+사업자 페이지
 <a th:href="@{businessMember/businessMemberPage}">사업자회원 페이지</a>
 
-<!--시큐리티 : 사업자-->
+&lt;!&ndash;시큐리티 : 사업자&ndash;&gt;
 <a th:href="@{businessMember/bmUpdate/bm_Update}">사업자 수정하기</a>
 <a th:href="@{businessMember/selectBusinessMember/selectBM}">사업자 회원 찾기</a>
 
 
 
-<!--시큐리티 : 관리자만 볼 수 있게-->
-<a th:href="@{Member/memberList/members}">회원목록</a>
+&lt;!&ndash;시큐리티 : 관리자만 볼 수 있게&ndash;&gt;
+<a th:href="@{Member/memberList/members}">회원목록</a>-->
 
 </body>
 </html>

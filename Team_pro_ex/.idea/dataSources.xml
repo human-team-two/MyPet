@@ -6,9 +6,9 @@
       <synchronize>true</synchronize>
       <auto-commit>false</auto-commit>
       <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
-      <jdbc-url>jdbc:oracle:thin:@bjhuman_high</jdbc-url>
+      <jdbc-url>jdbc:oracle:thin:@sjhuman_high</jdbc-url>
       <jdbc-additional-properties>
-        <property name="TNSADMIN_DIR" value="$USER_HOME$/Desktop/Wallet_BJHuman" />
+        <property name="TNSADMIN_DIR" value="$PROJECT_DIR$/../../../Oracle/Wallet_SJHuman" />
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>

@@ -1,56 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
 <head>
     <meta charset="UTF-8">
-    <title>질문등록</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+    <title>공지사항 등록</title>
+    <!--다음 주소 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!--부트스트랩 api -->
+
+    <!--    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />-->
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
     <block th:replace="common/dropmenu :: menu"></block>
+    <script>
+        /* $(document).ready(function(){
+             $("input, textarea").focus(function(){
+                 $(this).css("background-color", "$header-backcolor");
+             });
+             $("input, textarea").blur(function(){
+                 $(this).css("background-color", "$font-color-white");
+             });
+         });*/
+    </script>
 </head>
-<body th:align="center">
-<header th:replace="common/header :: header"></header>
+<body>
+<div th:replace="common/header" :: header></div>
 <article>
-<div class="container my-3">
-<h1 class="my-3 border-bottom pb-2"> 공지사항 등록</h1>
-<!--
-    [클라이언트] html의 form태그를 통한 submit액션을 실행하면 [서버]로 전달되는 mapping주소
-    th:action="insertBoard"
-    mothod="post" // get/post방식으로 데이터 전달 명시하다
-    [서버]컨트롤러에서는 get방식 받는 것과 post방식으로 받는 것을 구분할 수 있습니다
-th:action="@{/Notice/insertNotice} -->
-    <form th:action="@{/Notice/insertNotice}" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="title" class="form-label">제목</label>
-            <input type="text" name="title" id="title" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="writer" class="form-label">작성자</label>
-            <input type="text" name="writer" id="writer" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">내용</label>
-            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
-        </div>
-        <input type="submit" value="저장하기" class="btn btn-primary my-2">
-    <div class="p-2 w-full">
-        <form>
-        <div class="mb-3">
-            <label for="formFileMultiple" class="form-label">이미지 등록 </label>
-            <input class= "form-control" multiple="multiple" type="file" id="formFileMultiple" name="uploadfile">
-        </div>
+    <div id="warapper">
+        <a class="logo block" href="main.html">My Pet</a>
+        <form id="container" th:object="${Notice}" th:action="@{/Notice/insertNotice}" method="post"
+              enctype="multipart/form-data">
+            <!--                        <input type="hidden" name="page" value="0">-->
+            <!--                        <input type="hidden" name="size" value="3">-->
+            <!--                        <input class="input-group-text" type="hidden" name="writer" th:value="${member.id}" size="25"-->
+            <!--                               placeholder="작성자를 입력하세요" aria-label="작성자를 입력하세요"/>-->
+            <!--            &lt;!&ndash;-->
+            <div>
+                <p class="join-p-size">작성자</p>
+                <input type="text" class="border" name="writer" placeholder="아이디를 입력하세요" aria-label="아이디를 입력하세요">
+            </div>
+            <div>
+                <p class="join-p-size">제목</p>
+                <input type="text" class="border" name="title" placeholder="제목을 입력하세요" aria-label="제목을 입력하세요">
+            </div>
+            <!--            <div>-->
+            <!--                <p class="join-p-size">작성자</p>-->
+            <!--                <input type="text" class="border" name="writer" placeholder="작성자를 입력하세요" aria-label="제목을 입력하세요">-->
+            <!--            </div>-->
+            <div>
+                <p class="join-p-size">내용</p>
+                <textarea type="text" class="border" name="content" placeholder="공지사항을 입력하세요"
+                          aria-label="공지사항을 입력하세요"></textarea>
+            </div>
+            <!--            <div>-->
+            <!--                <input type="file" name="accommodationimage" multiple="multiple" type="file" id="formFileMultiple"-->
+            <!--                       name="uploadfile">-->
+            <!--            </div>-->
+            <div>
+                <input class="border join-button-submit" type="submit" value="공지사항 등록">
+            </div>
         </form>
-<!--    <input multiple="multiple" type="file" name="uploadfile"/>-->
-<!--    <input multiple="multiple" type="file" name="uploadfile"/>-->
-<!--    <input multiple="multiple" type="file" name="uploadfile"/>-->
-<!--    <input multiple="multiple" type="file" name="uploadfile"/>-->
+        <a class="border join-button-submit" th:href="@{/Notice/getNoticeList}">돌아가기</a>
     </div>
-<a th:href="@{/Notice/getNoticeList}">공지사항 목록</a>
-<hr>
-</form>
-</div>
 </article>
 <footer th:replace="common/footer :: footer"></footer>
 </body>

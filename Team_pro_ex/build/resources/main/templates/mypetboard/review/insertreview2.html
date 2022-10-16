@@ -1,82 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>숙소 등록 페이지</title>
-    <!--다음 주소 api -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <!--부트스트랩 api -->
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset = UTF-8">
+        <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+        <block th:replace="common/dropmenu :: menu"></block>
+        <title>문의사항 등록 Page</title>
 
-    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
-</head>
-<body>
-<div th:replace="common/header" :: header></div>
-<div id="warapper">
-    <a class="logo block" href="main.html">My Pet</a>
-    <form id="container" th:object="${accommodation}" th:action="@{/mypetboard/accommodation/insertAccommodation}" method="post" enctype="multipart/form-data">
-        <div>
-            <p class="join-p-size">숙소타입</p>
-            <select name="detailCategory" title="2">
-                <option value="모텔">모텔</option>
-                <option value="호텔">호텔</option>
-                <option value="펜션">펜션</option>
-            </select>
-        </div>
-        <div>
-            <p class="join-p-size" >숙소이름</p>
-            <input type="text" class="border" name="storeName" placeholder="숙소이름 입력">
-        </div>
-        <div>
-            <p class="join-p-size" th:for="postcode">주소</p>
-            <input type="text" class="border"  name="Address" th:field="*{address}"  id="Address" placeholder="주소">
+        <script>
+            $(document).ready(function(){
+                $("input, textarea").focus(function(){
+                    $(this).css("background-color", "powderblue");
+                });
+                $("input, textarea").blur(function(){
+                    $(this).css("background-color", "white");
+                });
+            });
+        </script>
 
-        </div>
-        <div>
-            <p class="join-p-size">상세주소</p>
-            <input type="text" class="border" name="DetailAddress" th:field="*{detailAddress}"id="detailAddress" placeholder="상세주소">
-        </div>
-        <div>
-            <p class="join-p-size">우편번호 </p>
-            <input type="number" class="border"name="Postcode" th:field="*{postcode}"  id="postcode" placeholder="우편번호">
-        </div>
-        <div>
-            <p class="join-p-size">주소검색</p>
-            <input type="button" class="border insertmember-button-submit" onclick="Postcode()" value="주소검색">
-        </div>
-        <div>
-            <p class="join-p-size">숙소전화번호</p>
-            <input type="tel" class="border"  name="StoreTelephone" placeholder="숙소전화번호 입력">
-        </div>
-        <div>
-            <p class="join-p-size">숙소 상세</p>
-            <input type="text" class="border"  name="Info" placeholder="숙소 상세 입력">
-        </div>
-        <div>
-            <p class="join-p-size">펫 종류</p>
-            <select name="PetSize" title="2">
-                <option value="소형">소형</option>
-                <option value="중형">중형</option>
-                <option value="대형">대형</option>
-                <option value="전체">전체</option>
-            </select>
-        </div>
-        <input type="file" name="accommodationimage" multiple ="multiple">
-        <div>
-            <input class="border" type="submit" value="숙소등록">
-        </div>
-    </form>
-
-</div>
-<div th:replace="common/footer.html" :: footer></div>
-<script>
-    includeHTML();
-</script>
-<!--주소 api -->
-<script src="/js/Addressapi.js"></script>
-
-</body>
+    </head>
+    <body>
+    <header th:replace="common/header :: header"></header>
+    <article>
+    <hr>
+    <h3 th:align="center" style="color:#d2691e">문의사항 등록 Page</h3>
+    <hr>
+            <form th:action="@{/mypetboard/review/insertreview}" method="post">
+                <input type="hidden" name="page" value="0">
+                <input type="hidden" name="size" value="3">
+                <input class="input-group-text" type = "hidden" name = "writer" th:value="${member.id}" size="25"
+                       placeholder="작성자를 입력하세요" aria-label="작성자를 입력하세요"/>
+            <table class="table table-striped" th:align="center" th:border="1" th:cellpadding="0" th:cellspacing="0">
+                <tr>
+                    <td th:width = "100" align="center">분류</td>
+                    <td><select name="category" th:width="20">
+                    <option value="선택안함" selected disabled hidden>=문의사항 선택=</option>
+                    <option value="예약관련">예약관련</option>
+                    <option value="이용관련">이용관련</option>
+                    <option value="불편사항">불편사항</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td th:width="100" th:align="center">작성자</td>
+                    <td><input class="input-group-text" type = "text" name = "writer"  size="25"
+                               placeholder="작성자를 입력하세요" aria-label="작성자를 입력하세요"/></td>
+                </tr>
+                <tr>
+                    <td th:align="center">제목</td>
+                    <td><input class="input-group-text" type = "text" name = "title" size="25"
+                               placeholder="제목을 입력하세요" aria-label="제목을 입력하세요"/></td>
+                </tr>
+                <tr>
+                    <td th:align="center">내용</td>
+                    <td><textarea class="input-group-text" name = "content" cols="40" rows="8"
+                                  placeholder="문의사항을 입력하세요" aria-label="문의사항을 입력하세요"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align = "center">
+                        <input type = "submit" value = "문의사항 등록"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <hr>
+        <a th:href="@{/mypetboard/review/reviewList}"><button class="btn btn-outline-success">문의사항 LIST PAGE</button></a>
+    </article>
+    <footer th:replace="common/footer :: footer"></footer>
+    </body>
 </html>

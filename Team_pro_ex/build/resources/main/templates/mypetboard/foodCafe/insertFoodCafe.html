@@ -11,13 +11,15 @@
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
     <block th:replace="common/dropmenu :: menu"></block>
-    <script src="/js/includeHTML.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <header th:replace="common/header :: header"></header>
+<article>
 <div id="warapper">
-    <a class="logo block" href="main.html"></a>
+    <a class="logo block" href="main.html">My Pet</a>
     <form id="container" th:object="${foodcafe}" th:action="@{/mypetboard/foodCafe/insertFoodCafe}" method="post" enctype="multipart/form-data">
         <div>
             <p class="join-p-size">가게타입</p>
@@ -45,7 +47,7 @@
         </div>
         <div>
             <p class="join-p-size">주소검색</p>
-            <input type="button" class="border insertmember-button-submit" onclick="Postcode()" value="주소검색">
+            <input type="button" class="border join-button-submit" onclick="Postcode()" value="주소검색">
         </div>
         <div>
             <p class="join-p-size">가게전화번호</p>
@@ -66,15 +68,12 @@
         </div>
         <input type="file" name="foodcafeimage" multiple ="multiple">
         <div>
-            <input class="border" type="submit" value="가게등록">
+            <input class="border join-button-submit" type="submit" value="가게등록">
         </div>
     </form>
-
 </div>
+</article>
 <footer th:replace="common/footer :: footer"></footer>
-<script>
-    includeHTML();
-</script>
 <!--주소 api -->
 <script src="/js/Addressapi.js"></script>
 

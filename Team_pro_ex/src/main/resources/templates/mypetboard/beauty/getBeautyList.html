@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/css/header.css"/>
     <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/list.css"/>
     <block th:replace="common/dropmenu :: menu"></block>
 
     <style>
@@ -47,17 +48,17 @@
                             <h5 class="fw-bolder"  th:text="${beauty.storeName}"></h5>
                             <!-- Product price-->
                             <div th:text="${beauty.info}"></div>
-                            <a class="btn btn-outline-dark mt-auto" th:href="@{getBeauty(seq=${beauty.seq})}">상세정보</a>
+                            <a class="btn btn-outline-success" th:href="@{getBeauty(seq=${beauty.seq})}">상세정보</a>
                         </div>
                     </div>
                     <!-- Product actions-->
-                    <td> <button class="btn btn-outline-dark mt-auto" th:onclick="btnDel([[${beauty.seq}]]);" sec:authorize="hasAnyAuthority('ROLE_MANAGER')">가게삭제</button></td>
+                    <td> <button class="btn btn-outline-success" th:onclick="btnDel([[${beauty.seq}]]);" sec:authorize="hasAnyAuthority('ROLE_MANAGER')">가게삭제</button></td>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<a class="btn btn-outline-dark mt-auto" th:href="@{/mypetboard/beauty/insertBeauty}" style="background-color: #6667AB;" sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')">가게등록</a>
+<a class="btn btn-outline-success" th:href="@{/mypetboard/beauty/insertBeauty}" sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')">가게등록</a>
 <form th:action="@{/mypetboard/foodCafe/getBeautyList}" method="GET">
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
          <span style="display:flex; justify-content:flex-end; align-items:center;">
@@ -73,16 +74,16 @@
             <input type="text" class="form-control" id="searchKeyword" name="searchKeyword" th:value="${searchKeyword}" placeholder="검색어 입력" autocomplete="off">
            </span>
         <span>
-       <button class="form-control"  style="color:#ffffffcc; background-color: #6667AB; width: 150px;" type="submit">Search</button>
+       <button class="btn btn-outline-success" type="submit">Search</button>
        </span>
     </div>
 </form>
 <div th:if ="${!BeautyList.isEmpty()}" class="pagination justify-content-center" >
     <ul>
-        <li class="btn btn-outline-dark mt-auto" style="background-color: #6667AB;"th:classappend="${BeautyList.hasPrevious()} ? 'disabled'" >
+        <li class="btn btn-outline-success" th:classappend="${BeautyList.hasPrevious()} ? 'disabled'" >
             <a  th:href="@{|?page=${previous}|}">이전</a>
         </li>
-        <li class="btn btn-outline-dark mt-auto" style="background-color: #6667AB;" th:classappend="${BeautyList.hasNext()} ? 'disabled'" >
+        <li class="btn btn-outline-success" th:classappend="${BeautyList.hasNext()} ? 'disabled'" >
             <a class= th:href="@{|?page=${next}|}">다음</a>
         </li>
     </ul>

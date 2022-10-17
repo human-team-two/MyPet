@@ -1,4 +1,3 @@
-/*
 package com.example.team_pro_ex.Config;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -20,4 +19,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/images/**")
                 .addResourceLocations(potoAdd);
     }
-}*/
+}

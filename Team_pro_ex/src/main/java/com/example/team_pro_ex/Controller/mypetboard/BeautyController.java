@@ -86,7 +86,7 @@ public class BeautyController {
     //이미지 전송
     @GetMapping(value = "/image/{imgname}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<byte[]> imageLoading(@PathVariable("imgname")String input_imgName) throws IOException {
-        String path = "C:/Users/Lee/Desktop/project/Team_pro_ex/image/"+input_imgName;
+        String path = "C:/work/MyPet/Team_pro_ex/image/"+input_imgName;
         InputStream fis = new FileInputStream(path);
         BufferedInputStream bis =  new BufferedInputStream(fis);
         byte[] imgByteArr = bis.readAllBytes();

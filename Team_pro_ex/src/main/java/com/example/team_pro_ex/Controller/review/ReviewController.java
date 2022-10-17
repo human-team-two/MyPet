@@ -46,7 +46,7 @@ public class ReviewController {
         // review.setMember(userDetails.getMember()) => 멤버를 넘겨줌
        // reviewService.insertReview(review.setMember(userDetails.getMember()));
         System.out.println("-----insertreview= " + review);
-        return "redirect:/mypetboard/review/reviewList";
+        return String.format("redirect:/mypetboard/review/reviewList?page=0&size=5");
     }
     //0929 카테고리 선택 후 검색기능
     @GetMapping("/mypetboard/review/reviewList")
@@ -89,7 +89,7 @@ public class ReviewController {
         }else{
             System.out.println("아이디가 아닙니다.");
         }
-        return "redirect:/mypetboard/review/reviewList";
+        return String.format("redirect:/mypetboard/review/reviewList?page=0&size=5");
     }
     @PostMapping("/mypetboard/review/updateReview")
     public String updatereview(@AuthenticationPrincipal PrincipaDetailsMember userDetails, Review review) {
@@ -101,6 +101,6 @@ public class ReviewController {
         }else{
             System.out.println("아이디가 아닙니다.");
         }
-        return "redirect:/mypetboard/review/reviewList";
+        return String.format("redirect:/mypetboard/review/reviewList?page=0&size=5");
     }
 }

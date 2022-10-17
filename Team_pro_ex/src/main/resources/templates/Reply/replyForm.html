@@ -5,19 +5,28 @@
 <head>
     <meta charset="UTF-8">
     <title>댓글 수정</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
 </head>
 <body>
-<div class="container">
-    <h5 class="my-3 border-bottom pb-2">댓글 수정</h5>
-    <form th:object="${reply}" method="post">
-        <input name="seq" type="hidden" th:value="${r_seq}">
-        <div class="mb-3">
-            <label for="r_content" class="form-label">내용</label>
-            <textarea class="form-control" rows="10" id="r_content" name="r_content"></textarea>
-        </div>
-        <input type="submit" value="저장하기" class="btn btn-primary my-2">
-    </form>
-</div>
+<header th:replace="common/header :: header"></header>
+<article>
+    <div class="replayform-container">
+        <a class="logo block" href="main.html">My Pet</a>
+        <form th:object="${reply}" method="post">
+            <input name="seq" type="hidden" th:value="${reply.r_seq}">
+            <div class="replayform-div-01">
+                <p class="join-p-size">댓글 내용</p>
+                <textarea class="border" rows="10" id="r_content" name="r_content"></textarea>
+            </div>
+            <input class="border join-button-submit" type="submit" value="수정하기">
+        </form>
+    </div>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
 <!-- Bootstrap JS -->
 <script src="/bootstrap.min.js"></script>

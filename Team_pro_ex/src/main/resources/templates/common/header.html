@@ -55,6 +55,10 @@
                 <li class="header-dropmenu-03" sec:authorize="isAnonymous() or isAuthenticated()">
                     <a class="header-dropmenu-04" th:href="@{Member/mUpdate/Update}">회원 수정하기</a>
                 </li>
+                <li class="header-dropmenu-03"
+                    sec:authorize="hasAnyAuthority('ROLE_MANAGER')">
+                    <a class="header-dropmenu-04" href="/Member/memberList/members">회원 목록</a>
+                </li>
             </ul>
         </li>
         <!--로그인 안한 사람들도 볼 수 있게-->

@@ -116,7 +116,7 @@ public class FoodCafeController {
         model.addAttribute("next" , pageable.next().getPageNumber());
 
 
-        return "/mypetboard/foodCafe/getFoodCafeList";
+        return "mypetboard/foodCafe/getFoodCafeList";
     }
 
     @GetMapping("/getFoodCafe")
@@ -159,7 +159,7 @@ public class FoodCafeController {
     public ResponseEntity<byte[]> imageView3(@PathVariable("imageview")String input_imgName) throws IOException {
         //ResponseEntity<Byte[]>:http 프로토콜을 통해서 byte 데이터를 전달하는 객체 , byte(소문자 = 기본타입)
         //@PathVariable: URL주소의 값을 받아옴
-        String path = "C:/work/MyPet/Team_pro_ex/image/" +input_imgName;
+        String path = "/home/ubuntu/server/image/" +input_imgName;
         //데이터(이미지)를 전송 하기 위한 객체로써 java에서는 항상 데이터를 스트림 타입으로 전달
         //객체(데이터 저장) :String,int,double
         //String객체는 파일을 컴퓨터가 cpu에서 바로 읽어 들일수 있도록 하는 갳체
@@ -190,13 +190,13 @@ public class FoodCafeController {
         List<String> path1 = new ArrayList<>();
 
         for(MenuImage mi: MenuImageList) {
-            String savePath =  "/mypetboard/accommodation/image/"+ mi.getUuid()+"_"+ mi.getOriginalFilename();
+            String savePath =  "/home/ubuntu/server/image/"+ mi.getUuid()+"_"+ mi.getOriginalFilename();
             path1.add(savePath);
         }
 
         model.addAttribute("mimgLoading", path1);
 
-        return "/mypetboard/foodCafe/insertMenu";
+        return "mypetboard/foodCafe/insertMenu";
     }
 
     @PostMapping("/insertMenu/{seq}")

@@ -114,7 +114,7 @@ public class AccommodationController {
     public ResponseEntity<byte[]> imageLoading(@PathVariable("imgname")String input_imgName) throws IOException {
         //ResponseEntity<Byte[]>:http 프로토콜을 통해서 byte 데이터를 전달하는 객체 , byte(소문자 = 기본타입)
         //@PathVariable: URL주소의 값을 받아옴
-        String path = "C:/work/MyPet/Team_pro_ex/image/"+input_imgName;
+        String path = "/home/ubuntu/server/image"+input_imgName;
         //데이터(이미지)를 전송 하기 위한 객체로써 java에서는 항상 데이터를 스트림 타입으로 전달
         //객체(데이터 저장) :String,int,double
         //String객체는 파일을 컴퓨터가 cpu에서 바로 읽어 들일수 있도록 하는 갳체
@@ -166,7 +166,7 @@ public class AccommodationController {
         model.addAttribute("previous" , pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next" , pageable.next().getPageNumber());
 
-        return "/mypetboard/accommodation/getAccommodationList";
+        return "mypetboard/accommodation/getAccommodationList";
     }
 
     @GetMapping("/getAccommodation")
@@ -183,7 +183,7 @@ public class AccommodationController {
 
         /* 저장된 숙소이미지 불러와서 뷰에 뿌려주기 */
         AccommodationImage accommodationImage = accommodationService.getAccommodationImageEntity(accommodation.getSeq());
-        String path = "/mypetboard/accommodation/image/"+ accommodationImage.getUuid()+"_"+ accommodationImage.getOriginalFilename();
+        String path = "/home/ubuntu/server/image/"+ accommodationImage.getUuid()+"_"+ accommodationImage.getOriginalFilename();
         model.addAttribute("imgLoding", path);
 
         /* 저장된 룸 이미지 불러와서 뷰에 뿌려주기 */
@@ -191,7 +191,7 @@ public class AccommodationController {
         List<String> path1 = new ArrayList<>();
 
         for(RoomImage ri: roomImageList) {
-            String savePath =  "/mypetboard/accommodation/image/"+ ri.getUuid()+"_"+ ri.getOriginalFilename();
+            String savePath =  "/home/ubuntu/server/image/"+ ri.getUuid()+"_"+ ri.getOriginalFilename();
             path1.add(savePath);
         }
 //        model.addAttribute("rimgLoading", path1);
@@ -203,7 +203,7 @@ public class AccommodationController {
 
 
 
-        return "/mypetboard/accommodation/getAccommodation";
+        return "mypetboard/accommodation/getAccommodation";
     }
     @GetMapping("/deleteAccommodation")
     public String deleteAccommodation(Accommodation accommodation){
@@ -235,13 +235,13 @@ public class AccommodationController {
         List<String> path1 = new ArrayList<>();
 
         for(RoomImage ri: roomImageList) {
-            String savePath =  "/mypetboard/accommodation/image/"+ ri.getUuid()+"_"+ ri.getOriginalFilename();
+            String savePath =  "/home/ubuntu/server/image/"+ ri.getUuid()+"_"+ ri.getOriginalFilename();
             path1.add(savePath);
         }
 
         model.addAttribute("rimgLoading", path1);
 
-        return "/mypetboard/accommodation/insertRoom";
+        return "mypetboard/accommodation/insertRoom";
     }
     //룸 등록 Controller
     @PostMapping("/insertRoom/{seq}")

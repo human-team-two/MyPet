@@ -83,7 +83,7 @@ public class HospitalController {
     public ResponseEntity<byte[]> imageView2(@PathVariable("imageview")String input_imgName) throws IOException {
         //ResponseEntity<Byte[]>:http 프로토콜을 통해서 byte 데이터를 전달하는 객체 , byte(소문자 = 기본타입)
         //@PathVariable: URL주소의 값을 받아옴
-        String path = "C:/work/MyPet/Team_pro_ex/image/" +input_imgName;
+        String path = "/home/ubuntu/server/image/" +input_imgName;
         //데이터(이미지)를 전송 하기 위한 객체로써 java에서는 항상 데이터를 스트림 타입으로 전달
         //객체(데이터 저장) :String,int,double
         //String객체는 파일을 컴퓨터가 cpu에서 바로 읽어 들일수 있도록 하는 갳체
@@ -131,7 +131,7 @@ public class HospitalController {
         model.addAttribute("next" , pageable.next().getPageNumber());
 
 
-        return "/mypetboard/hospital/getHospitalList";
+        return "mypetboard/hospital/getHospitalList";
     }
 
     @GetMapping("/getHospital")
@@ -145,7 +145,7 @@ public class HospitalController {
         HospitalImage hospitalImage = hospitalService.getHospitalImageEntity(hospital.getSeq());
         String path = "/mypetboard/hospital/image/" +hospitalImage.getUuid()+"_"+hospitalImage.getOriginalFilename();
         model.addAttribute("imageview", path);
-        return "/mypetboard/hospital/getHospital";
+        return "mypetboard/hospital/getHospital";
     }
 
     @GetMapping("/deleteHospital")

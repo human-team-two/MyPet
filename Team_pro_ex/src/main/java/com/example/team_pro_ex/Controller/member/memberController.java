@@ -37,7 +37,7 @@ public class memberController {
     public String membrerList(Model model){
         model.addAttribute("member", memberService.getMemberListEncodingByMemberList(
                 memberService.getMemberList()));
-        return  "/Member/memberList/members";
+        return  "member/memberList/members";
     }
     //일반 회원가입
     @GetMapping("/Member/mJoin/Join")
@@ -46,7 +46,7 @@ public class memberController {
         System.out.println("get방식으로 인한 Join페이지 = 우리가 처음 join페이지를 들어갈 떄는 null값이 뜰 수 밖에없다.");
         System.out.println("왜냐!!?!? 값이 없으니까!");
         model.addAttribute(new Member());
-        return "Member/mJoin/Join";
+        return "member/mJoin/Join";
     }
     @PostMapping("/Member/mJoin/Join")
     public String insertMember(@Valid Member member, Errors errors, Model model){
@@ -81,7 +81,7 @@ public class memberController {
             for(String key : member_Availability.keySet()){
                 model.addAttribute(key, member_Availability.get(key));
             }
-            return "/Member/mJoin/Join";
+            return "member/mJoin/Join";
         }
 //        Member findMember = memberService.getMemberWhereId(member.getId());
 //        if(findMember != null){
@@ -104,7 +104,7 @@ public class memberController {
         System.out.println("왜냐!!?!? 값이 없으니까!");
         //객체로 주입하면 thyreef에서는 객체 member로 받는다.
         model.addAttribute(userDetails/**/.getMember());
-        return "/Member/mUpdate/Update";
+        return "member/mUpdate/Update";
     }
 
 
@@ -186,7 +186,7 @@ public class memberController {
                         Model model) {
         model.addAttribute("error", error);
         model.addAttribute("exception", exception);
-        return "/Member/Login";
+        return "member/Login";
     }
 
     public void loginPage(){
@@ -217,7 +217,7 @@ public class memberController {
         System.out.println("------select ID--------");
         System.out.println(memberService.booleanSearchUserById(member));
         model.addAttribute("member", memberService.getMemberWhereId(member.getId()));
-        return "/Member/selectMember/result";
+        return "member/selectMember/result";
     }
 
 

@@ -53,7 +53,7 @@ import java.util.UUID;
         Page<NoticeNotice> noticeList = noticeService.searchNotice(pageable, keyword);
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("keyword", keyword);
-        return "/Notice/getNoticeList";
+        return "Notice/getNoticeList";
     }
 //    @GetMapping("/getNoticeList")
 //    public String NoticeList(
@@ -140,7 +140,7 @@ import java.util.UUID;
         noticeService.updateCnt(notice.getSeq());
         model.addAttribute("notice", noticeService.getNotice(notice));
         model.addAttribute("imgLoading", path);
-        return "/Notice/getNotice";
+        return "Notice/getNotice";
 
     }
 
@@ -154,7 +154,7 @@ import java.util.UUID;
     @GetMapping("/updateNotice")
     public String updateNoticeView(NoticeNotice notice, Model model) {
         model.addAttribute("notice", noticeService.getNotice(notice));
-        return "/Notice/getNotice";
+        return "Notice/getNotice";
     }
 
     //공지사항 삭제
@@ -189,7 +189,7 @@ import java.util.UUID;
                 file.transferTo(newFileName);
             }
         }
-        return "/Notice/getNoticeList";
+        return "Notice/getNoticeList";
     }
 
     @GetMapping(value = "/image/{imagename}", produces = MediaType.IMAGE_JPEG_VALUE)

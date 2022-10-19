@@ -53,7 +53,7 @@
                 </li>
                 <!--로그인한 사람들만 보이게-->
                 <li class="header-dropmenu-03" sec:authorize="isAnonymous() or isAuthenticated()">
-                    <a class="header-dropmenu-04" th:href="@{Member/mUpdate/Update}">회원 수정하기</a>
+                    <a class="header-dropmenu-04" th:href="@{/Member/mUpdate/Update}">회원 수정하기</a>
                 </li>
                 <li class="header-dropmenu-03"
                     sec:authorize="hasAnyAuthority('ROLE_MANAGER')">

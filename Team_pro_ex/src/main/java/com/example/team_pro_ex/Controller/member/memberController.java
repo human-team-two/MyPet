@@ -208,7 +208,7 @@ public class memberController {
     //아이디 찾기 = 핸드폰 번호로 찾기(from 화면만 보임)
     @GetMapping("/Member/selectMember/select")
     public String selectMember() {
-        return "/Member/selectMember/select";
+        return "member/selectMember/select";
     }
 
     //핸드폰으로 아이디찾기 => 결과값을 보여준다.
